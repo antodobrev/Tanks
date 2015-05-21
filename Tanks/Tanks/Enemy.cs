@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Tanks
 {
-    class Tank : GameObject
+    class Enemy:GameObject
     {
         private int x;
         private int y;
@@ -15,23 +15,19 @@ namespace Tanks
         private int boundaryY;
 
         private const string symbols = "O";
-        private const ConsoleColor color = ConsoleColor.Yellow;
+        public static List<ConsoleColor> PossibleColors = new List<ConsoleColor>
+            {
+                ConsoleColor.Red,
+                ConsoleColor.Blue,
+                ConsoleColor.DarkBlue,
+                ConsoleColor.DarkYellow,
+                ConsoleColor.DarkGreen
+            };
+        private ConsoleColor color = PossibleColors[random.Next(0, PossibleColors.Count)];
+        public static Random random = new Random();
 
         private bool striked;
 
-        int livesLeft;
-
-        public string Direction = "up";
-
-        public Tank(int BoundaryX, int BoundaryY)
-        {
-            this.livesLeft = 5;
-            this.striked = false;
-            this.boundaryX = BoundaryX;
-            this.boundaryX = BoundaryY;
-            this.x = BoundaryX / 2;
-            this.y = BoundaryY - 1;
-        }
         public ConsoleColor Color
         {
             get
@@ -63,32 +59,13 @@ namespace Tanks
                 this.y = value;
             }
         }
-
-        public bool Striked
+        public Enemy(int BoundaryX, int BoundaryY)
         {
-            get
-            {
-                return striked;
-            }
-            set
-            {
-                striked = value;
-                if (striked == true)
-                {
-                    if (livesLeft > 0)
-                    {
-                        livesLeft--;
-                    }
-                }
-            }
-        }
-
-        public int LivesLeft
-        {
-            get
-            {
-                return livesLeft;
-            }
+            this.striked = false;
+            this.boundaryX = BoundaryX;
+            this.boundaryX = BoundaryY;
+            this.x = boundaryX;
+            this.y = boundaryY;
         }
         public void MoveRight()
         {
@@ -99,7 +76,7 @@ namespace Tanks
         }
         public void MoveLeft()
         {
-            if (x-1 >= 0)
+            if (x - 1 >= 0)
             {
                 x--;
             }

@@ -21,6 +21,7 @@ namespace Tanks
             int boundaryY = Console.BufferHeight;
             Console.CursorVisible = false;
             Tank ourTank = new Tank(40, boundaryY);
+            Enemy newEnemy = new Enemy(0, 1);
             Intro.FirstIntro();
             Intro.SecondIntro();
             //DrawGameMenu();
@@ -83,6 +84,7 @@ namespace Tanks
                         bullets.Remove(bullets[i]);
                     }
                 }
+                newEnemy.Draw();
                 ourTank.Draw();
                 Thread.Sleep(70);
             }
