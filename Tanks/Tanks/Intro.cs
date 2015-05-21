@@ -1,14 +1,73 @@
 ﻿using System;
 using System.IO;
 using System.Text;
+using System.Threading;
 
 namespace Tanks
 {
-    public static class Intro
+    class Intro
     {
+        public static void FirstIntro()
+        {
+            using (StreamReader reader = new StreamReader(@"C:\Users\Ivan\Desktop\T.txt"))
+            {
+                string line = reader.ReadLine();
+                while (line != null)
+                {
+                    line = reader.ReadLine();
+                    Console.WriteLine(line);
+                }
+            }
+            Thread.Sleep(1000);
+            Console.Clear();
+            using (StreamReader reader = new StreamReader(@"C:\Users\Ivan\Desktop\A.txt"))
+            {
+                string line = reader.ReadLine();
+                while (line != null)
+                {
+                    line = reader.ReadLine();
+                    Console.WriteLine(line);
+                }
+            }
+            Thread.Sleep(1000);
+            Console.Clear();
+            using (StreamReader reader = new StreamReader(@"C:\Users\Ivan\Desktop\N.txt"))
+            {
+                string line = reader.ReadLine();
+                while (line != null)
+                {
+                    line = reader.ReadLine();
+                    Console.WriteLine(line);
+                }
+            }
+            Thread.Sleep(1000);
+            Console.Clear();
+            using (StreamReader reader = new StreamReader(@"C:\Users\Ivan\Desktop\K.txt"))
+            {
+                string line = reader.ReadLine();
+                while (line != null)
+                {
+                    line = reader.ReadLine();
+                    Console.WriteLine(line);
+                }
+            }
+            Thread.Sleep(1000);
+            Console.Clear();
+            using (StreamReader reader = new StreamReader(@"C:\Users\Ivan\Desktop\S.txt"))
+            {
+                string line = reader.ReadLine();
+                while (line != null)
+                {
+                    line = reader.ReadLine();
+                    Console.WriteLine(line);
+                }
+            }
+            Thread.Sleep(1000);
+            Console.Clear();
+        }
         public static void SecondIntro()
         {
-            Console.OutputEncoding = Encoding.Unicode; 
+            Console.OutputEncoding = Encoding.Unicode;
             StreamReader reader = new StreamReader(@"../../tanks_intro.txt");
             using (reader)
             {

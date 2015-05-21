@@ -21,7 +21,7 @@ namespace Tanks
             int boundaryY = Console.BufferHeight;
             Console.CursorVisible = false;
             Tank ourTank = new Tank(40, boundaryY);
-
+            Intro.FirstIntro();
             Intro.SecondIntro();
             //DrawGameMenu();
             List<Bullet> bullets = new List<Bullet>();
