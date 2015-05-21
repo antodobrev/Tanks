@@ -12,7 +12,7 @@ namespace Tanks
         const int MaximumEnemies = 10;
         static void Main()
         {
-            Console.BufferHeight = Console.WindowHeight = 40;
+            Console.BufferHeight = Console.WindowHeight = 39;
             Console.BufferWidth = Console.WindowWidth = 71;
             int boundaryX = 71;
             int boundaryY = Console.BufferHeight;
