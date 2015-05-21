@@ -31,7 +31,6 @@ namespace Tanks
             this.boundaryX = BoundaryY;
             this.x = BoundaryX / 2;
             this.y = BoundaryY - 1;
-            //this.Direction = "up";                            
         }
         public ConsoleColor Color
         {
@@ -61,7 +60,7 @@ namespace Tanks
             }
             set
             {
-                this.y=value;
+                this.y = value;
             }
         }
 
@@ -93,14 +92,14 @@ namespace Tanks
         }
         public void MoveRight()
         {
-            if (x + 1 < boundaryX - 1)
+            if (x + 1 < boundaryX)
             {
                 x++;
             }
         }
         public void MoveLeft()
         {
-            if (x - 1 > 0)
+            if (x-1 >= 0)
             {
                 x--;
             }
@@ -114,7 +113,7 @@ namespace Tanks
         }
         public void MoveDown()
         {
-            if (y + 1 < boundaryY - 4)
+            if (y + 1 < boundaryY)
             {
                 x++;
             }
@@ -124,7 +123,7 @@ namespace Tanks
             if (!striked)
             {
                 Console.ForegroundColor = color;
-                Console.SetCursorPosition(x - 1, y);
+                Console.SetCursorPosition(x, y);
                 Console.Write(symbols);
             }
             else

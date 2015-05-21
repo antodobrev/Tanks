@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 
@@ -23,7 +24,7 @@ namespace Tanks
 
             Intro.SecondIntro();
             //DrawGameMenu();
-
+            List<Bullet> bullets = new List<Bullet>();
             while (true)
             {
                 Console.Clear();
@@ -67,6 +68,7 @@ namespace Tanks
                     {
                         Bullet bullet = new Bullet();
                         bullet.Draw(ourTank);
+                        bullets.Add(bullet);
                     }
                 }
                 ourTank.Draw();

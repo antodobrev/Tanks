@@ -9,17 +9,23 @@ namespace Tanks
     class Bullet : GameObject
     {
         public static char body = '*';
+        public string Direction = string.Empty;
         private const ConsoleColor color = ConsoleColor.White;
+        private int x;
+        private int y;
+
+        private int boundaryX;
+        private int boundaryY;
         public int X
         {
-            get { return this.X; }
-            set { this.X = value; }
+            get { return this.x; }
+            set { this.x = value; }
         }
 
         public int Y
         {
-            get { return this.Y; }
-            set { this.Y = value; }
+            get { return this.y; }
+            set { this.y = value; }
         }
         public Bullet()
         {
@@ -38,6 +44,18 @@ namespace Tanks
                 return color;
             }
         }
+        public void MoveBullet()
+        {
+            if (y + 1 < boundaryY)  //If we are not at the bottom of the game field, move down.
+            {
+                y++;
+            }
+            else                   //Otherwise the rock becomes invisible
+            {
+                //visible = false;
+            }
+        }
+
         public void Draw(Tank tank)
         {
             int bulletInitX = tank.X;
@@ -46,15 +64,19 @@ namespace Tanks
             {
                 case "up":
                     bulletInitY -= 1;
+                    this.Direction = "up";
                     break;
                 case "down":
                     bulletInitY += 1;
+                    this.Direction = "down";
                     break;
                 case "left":
                     bulletInitX -= 1;
+                    this.Direction = "left";
                     break;
                 case "right":
                     bulletInitX += 1;
+                    this.Direction = "right";
                     break;
                 default:
                     break;
@@ -63,9 +85,13 @@ namespace Tanks
             Console.SetCursorPosition(bulletInitX, bulletInitY);
             Console.Write(body);
         }
+
         public void Draw() 
         {
 
+            Console.ForegroundColor = color;
+            Console.SetCursorPosition(x, y);
+            Console.Write(body);
         }
     }
 }
