@@ -9,7 +9,7 @@ namespace Tanks
         public static void SecondIntro()
         {
             Console.OutputEncoding = Encoding.Unicode; 
-            StreamReader reader = new StreamReader("tanks_intro.txt");
+            StreamReader reader = new StreamReader(@"../../tanks_intro.txt");
             using (reader)
             {
                 while (true)
