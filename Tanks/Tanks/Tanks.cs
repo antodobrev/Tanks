@@ -68,7 +68,7 @@ namespace Tanks
                     }
                 }
                 ourTank.Draw();
-                Thread.Sleep(100);
+                Thread.Sleep(70);
             }
         }
         private static void DrawGameMenu()
