@@ -12,7 +12,7 @@ namespace Tanks
         const int MaximumEnemies = 10;
         static void Main()
         {
-            Console.BufferHeight = Console.WindowHeight = 39;
+            Console.BufferHeight = Console.WindowHeight = 35;
             Console.BufferWidth = Console.WindowWidth = 71;
             int boundaryX = 71;
             int boundaryY = Console.BufferHeight;
@@ -30,28 +30,42 @@ namespace Tanks
                     while (Console.KeyAvailable) Console.ReadKey(true);
                     if (pressedKey.Key == ConsoleKey.LeftArrow)
                     {
-                        if (ourTank.X - 1 >= 0)
+                        if (ourTank.X - 1 > 0)
                         {
                             ourTank.X = ourTank.X - 1;
                         }
                     }
                     else if (pressedKey.Key == ConsoleKey.RightArrow)
                     {
-                        if (ourTank.X + 3 < 40)
+                        if (ourTank.X + 1 < 35)
                         {
                             ourTank.X = ourTank.X + 1;
                         }
                     }
-                    else if (pressedKey.Key == ConsoleKey.RightArrow)
+                    else if (pressedKey.Key == ConsoleKey.UpArrow)
                     {
-                        if (ourTank.X + 3 < 40)
+                        if (ourTank.Y - 1 >= 0)
                         {
-                            ourTank.X = ourTank.X + 1;
+                            ourTank.Y = ourTank.Y - 1;
                         }
+                    }
+                    else if (pressedKey.Key == ConsoleKey.DownArrow)
+                    {
+                        if (ourTank.Y + 1 < 35)
+                        {
+                            ourTank.Y = ourTank.Y + 1;
+                        }
+                    }
+                    else if (pressedKey.Key == ConsoleKey.Spacebar)
+                    {
+                        //if (ourTank.Y + 2 < 35)
+                        //{
+                        //    ourTank.Y = ourTank.Y + 2;
+                        //}
                     }
                 }
                 ourTank.Draw();
-                Thread.Sleep(150);
+                Thread.Sleep(100);
             }
         }
         private static void DrawGameMenu()

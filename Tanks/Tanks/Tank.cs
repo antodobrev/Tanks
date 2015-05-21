@@ -23,12 +23,12 @@ namespace Tanks
 
         public Tank(int BoundaryX, int BoundaryY)
         {
-            livesLeft = 5;
-            striked = false;
-            boundaryX = BoundaryX;
-            boundaryX = BoundaryY;
-            x = BoundaryX / 2;
-            y = BoundaryY - 1;                                          
+            this.livesLeft = 5;
+            this.striked = false;
+            this.boundaryX = BoundaryX;
+            this.boundaryX = BoundaryY;
+            this.x = BoundaryX / 2;
+            this.y = BoundaryY - 1;                                          
         }
         public ConsoleColor Color
         {
@@ -42,11 +42,11 @@ namespace Tanks
         {
             get
             {
-                return x;
+                return this.x;
             }
             set
             {
-                x = value;
+                this.x = value;
             }
         }
 
@@ -54,11 +54,11 @@ namespace Tanks
         {
             get
             {
-                return y;
+                return this.y;
             }
             set
             {
-                y=value;
+                this.y=value;
             }
         }
 
