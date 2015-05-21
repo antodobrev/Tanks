@@ -21,6 +21,8 @@ namespace Tanks
 
         int livesLeft;
 
+        public string Direction = "up";
+
         public Tank(int BoundaryX, int BoundaryY)
         {
             this.livesLeft = 5;
@@ -28,7 +30,8 @@ namespace Tanks
             this.boundaryX = BoundaryX;
             this.boundaryX = BoundaryY;
             this.x = BoundaryX / 2;
-            this.y = BoundaryY - 1;                                          
+            this.y = BoundaryY - 1;
+            //this.Direction = "up";                            
         }
         public ConsoleColor Color
         {

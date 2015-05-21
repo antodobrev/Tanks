@@ -30,6 +30,7 @@ namespace Tanks
                     while (Console.KeyAvailable) Console.ReadKey(true);
                     if (pressedKey.Key == ConsoleKey.LeftArrow)
                     {
+                        ourTank.Direction = "left";
                         if (ourTank.X - 1 > 0)
                         {
                             ourTank.X = ourTank.X - 1;
@@ -37,6 +38,7 @@ namespace Tanks
                     }
                     else if (pressedKey.Key == ConsoleKey.RightArrow)
                     {
+                        ourTank.Direction = "right";
                         if (ourTank.X + 1 < 35)
                         {
                             ourTank.X = ourTank.X + 1;
@@ -44,6 +46,7 @@ namespace Tanks
                     }
                     else if (pressedKey.Key == ConsoleKey.UpArrow)
                     {
+                        ourTank.Direction = "up";
                         if (ourTank.Y - 1 >= 0)
                         {
                             ourTank.Y = ourTank.Y - 1;
@@ -51,6 +54,7 @@ namespace Tanks
                     }
                     else if (pressedKey.Key == ConsoleKey.DownArrow)
                     {
+                        ourTank.Direction = "down";
                         if (ourTank.Y + 1 < 35)
                         {
                             ourTank.Y = ourTank.Y + 1;
@@ -58,10 +62,8 @@ namespace Tanks
                     }
                     else if (pressedKey.Key == ConsoleKey.Spacebar)
                     {
-                        //if (ourTank.Y + 2 < 35)
-                        //{
-                        //    ourTank.Y = ourTank.Y + 2;
-                        //}
+                        Bullet bullet = new Bullet();
+                        bullet.Draw(ourTank);
                     }
                 }
                 ourTank.Draw();
