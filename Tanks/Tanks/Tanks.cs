@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using System.Threading;
 
 namespace Tanks
@@ -14,11 +15,13 @@ namespace Tanks
         {
             Console.BufferHeight = Console.WindowHeight = 35;
             Console.BufferWidth = Console.WindowWidth = 71;
+            Console.OutputEncoding = Encoding.Unicode; 
             int boundaryX = 71;
             int boundaryY = Console.BufferHeight;
             Console.CursorVisible = false;
             Tank ourTank = new Tank(boundaryX / 2, boundaryY);
 
+            Intro.SecondIntro();
             //DrawGameMenu();
 
             while (true)
