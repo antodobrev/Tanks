@@ -9,7 +9,7 @@ namespace Tanks
     {
         public static void FirstIntro()
         {
-            using (StreamReader reader = new StreamReader(@"C:\Users\Ivan\Desktop\T.txt"))
+            using (StreamReader reader = new StreamReader(@"..\..\T.txt"))
             {
                 string line = reader.ReadLine();
                 while (line != null)
@@ -20,7 +20,7 @@ namespace Tanks
             }
             Thread.Sleep(1000);
             Console.Clear();
-            using (StreamReader reader = new StreamReader(@"C:\Users\Ivan\Desktop\A.txt"))
+            using (StreamReader reader = new StreamReader(@"..\..\A.txt"))
             {
                 string line = reader.ReadLine();
                 while (line != null)
@@ -31,7 +31,7 @@ namespace Tanks
             }
             Thread.Sleep(1000);
             Console.Clear();
-            using (StreamReader reader = new StreamReader(@"C:\Users\Ivan\Desktop\N.txt"))
+            using (StreamReader reader = new StreamReader(@"..\..\N.txt"))
             {
                 string line = reader.ReadLine();
                 while (line != null)
@@ -42,7 +42,7 @@ namespace Tanks
             }
             Thread.Sleep(1000);
             Console.Clear();
-            using (StreamReader reader = new StreamReader(@"C:\Users\Ivan\Desktop\K.txt"))
+            using (StreamReader reader = new StreamReader(@"..\..\K.txt"))
             {
                 string line = reader.ReadLine();
                 while (line != null)
@@ -53,7 +53,7 @@ namespace Tanks
             }
             Thread.Sleep(1000);
             Console.Clear();
-            using (StreamReader reader = new StreamReader(@"C:\Users\Ivan\Desktop\S.txt"))
+            using (StreamReader reader = new StreamReader(@"..\..\S.txt"))
             {
                 string line = reader.ReadLine();
                 while (line != null)
