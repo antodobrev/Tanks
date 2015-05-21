@@ -16,11 +16,11 @@ namespace Tanks
         {
             Console.BufferHeight = Console.WindowHeight = 35;
             Console.BufferWidth = Console.WindowWidth = 71;
-            Console.OutputEncoding = Encoding.Unicode; 
+            Console.OutputEncoding = Encoding.Unicode;
             int boundaryX = 71;
             int boundaryY = Console.BufferHeight;
             Console.CursorVisible = false;
-            Tank ourTank = new Tank(boundaryX / 2, boundaryY);
+            Tank ourTank = new Tank(40, boundaryY);
 
             Intro.SecondIntro();
             //DrawGameMenu();
@@ -69,6 +69,18 @@ namespace Tanks
                         Bullet bullet = new Bullet();
                         bullet.Draw(ourTank);
                         bullets.Add(bullet);
+                    }
+                }
+                for (int i = 0; i < bullets.Count; i++)
+                {
+                    if (bullets[i].isVisible)
+                    {
+                        bullets[i].MoveBullet();
+                        bullets[i].Draw();
+                    }
+                    else
+                    {
+                        bullets.Remove(bullets[i]);
                     }
                 }
                 ourTank.Draw();

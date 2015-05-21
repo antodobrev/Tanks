@@ -13,6 +13,7 @@ namespace Tanks
         private const ConsoleColor color = ConsoleColor.White;
         private int x;
         private int y;
+        public bool isVisible = true;
 
         private int boundaryX;
         private int boundaryY;
@@ -44,51 +45,68 @@ namespace Tanks
                 return color;
             }
         }
+        public void Kill()
+        {
+            if (x == 35 || x == 0)
+            {
+                isVisible = false;
+            }
+            else if (y == 34 || y == 0)
+            {
+                isVisible = false;
+            }
+        }
         public void MoveBullet()
         {
-            if (y + 1 < boundaryY)  //If we are not at the bottom of the game field, move down.
+            
+            switch (Direction)
             {
-                y++;
+                case "up": y -= 1;
+                    break;
+                case "down": y += 1;
+                    break;
+                case "left": x -= 1;
+                    break;
+                case "right": x += 1;
+                    break;
+                default:
+                    break;
             }
-            else                   //Otherwise the rock becomes invisible
-            {
-                //visible = false;
-            }
+            Kill();
         }
 
         public void Draw(Tank tank)
         {
-            int bulletInitX = tank.X;
-            int bulletInitY = tank.Y;
+            x = tank.X;
+            y = tank.Y;
             switch (tank.Direction)
             {
                 case "up":
-                    bulletInitY -= 1;
+                    y -= 1;
                     this.Direction = "up";
                     break;
                 case "down":
-                    bulletInitY += 1;
+                    y += 1;
                     this.Direction = "down";
                     break;
                 case "left":
-                    bulletInitX -= 1;
+                    x -= 1;
                     this.Direction = "left";
                     break;
                 case "right":
-                    bulletInitX += 1;
+                    x += 1;
                     this.Direction = "right";
                     break;
                 default:
                     break;
             }
 
-            Console.SetCursorPosition(bulletInitX, bulletInitY);
+            Console.SetCursorPosition(x, y);
             Console.Write(body);
         }
 
         public void Draw() 
         {
-
             Console.ForegroundColor = color;
             Console.SetCursorPosition(x, y);
             Console.Write(body);
