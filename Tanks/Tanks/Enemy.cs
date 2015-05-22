@@ -20,7 +20,7 @@ namespace Tanks
                 ConsoleColor.Red,
                 ConsoleColor.Blue,
                 ConsoleColor.DarkBlue,
-                ConsoleColor.DarkYellow,
+                ConsoleColor.DarkCyan,
                 ConsoleColor.DarkGreen
             };
         private ConsoleColor color = PossibleColors[random.Next(0, PossibleColors.Count)];

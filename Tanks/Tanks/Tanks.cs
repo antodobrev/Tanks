@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Threading;
 
@@ -28,7 +29,7 @@ namespace Tanks
             List<Bullet> bullets = new List<Bullet>();
             while (true)
             {
-                Console.Clear();
+                DrawGameField();
                 while (Console.KeyAvailable)
                 {
                     ConsoleKeyInfo pressedKey = Console.ReadKey(true);
@@ -87,16 +88,37 @@ namespace Tanks
                 newEnemy.Draw();
                 ourTank.Draw();
                 Thread.Sleep(70);
+                Console.Clear();
             }
-        }
-        private static void DrawGameMenu()
-        {
         }
         static void PrintOnPosition(int x, int y, string str, ConsoleColor color = ConsoleColor.DarkBlue) // for strings
         {
             Console.SetCursorPosition(x, y);
             Console.ForegroundColor = color;
             Console.Write(str);
+        }
+        public static void DrawGameField()
+        {
+            Console.OutputEncoding = Encoding.Unicode;
+            StreamReader reader = new StreamReader(@"../../playfield.txt");
+            using (reader)
+            {
+                while (true)
+                {
+                    string introLine = reader.ReadLine();
+                    if (introLine == null)
+                    {
+                        break;
+                    }
+
+                    Console.WriteLine(introLine);
+                }
+            }
+
+            Console.WriteLine();
+        }
+        private static void DrawGameMenu()
+        {
         }
     }
 }
