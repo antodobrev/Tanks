@@ -18,11 +18,11 @@ namespace Tanks
 
         public static List<ConsoleColor> PossibleColors = new List<ConsoleColor>
         {
-          ConsoleColor.Red,
           ConsoleColor.Blue,
           ConsoleColor.DarkBlue,
           ConsoleColor.DarkCyan,
-          ConsoleColor.DarkGreen
+          ConsoleColor.DarkGreen,
+          ConsoleColor.Green
         };
         public static List<string> PossibleDirections = new List<string>
         {

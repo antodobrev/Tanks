@@ -11,8 +11,8 @@ namespace Tanks
         private int x;
         private int y;
 
-        private int boundaryX;
-        private int boundaryY;
+        public int boundaryX;
+        public int boundaryY;
 
         private const string symbols = "O";
         private const ConsoleColor color = ConsoleColor.Yellow;

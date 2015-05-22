@@ -28,10 +28,11 @@ namespace Tanks
             get { return this.y; }
             set { this.y = value; }
         }
+
         public Bullet()
         {
-
         }
+
         public Bullet(int x, int y)
         {
             this.X = x;
@@ -45,16 +46,35 @@ namespace Tanks
                 return color;
             }
         }
-        public void Remove()
+
+        public void Shoot(Tank tank)
         {
-            if ((x == boundaryX) || (x == 0))
+            this.x = tank.X;
+            this.y = tank.Y;
+            this.boundaryX = tank.boundaryX;
+            this.boundaryY = tank.boundaryY;
+            if (tank.Direction == "up" && tank.Y != 0)
             {
-                isVisible = false;
+                this.y -= 1;
+                this.Direction = "up";
             }
-            else if (y == boundaryY || y == 0)
+            else if (tank.Direction == "down" && tank.Y != boundaryY - 1)
             {
-                isVisible = false;
+                this.y += 1;
+                this.Direction = "down";
             }
+            else if (tank.Direction == "left" && tank.X != 0)
+            {
+                this.x -= 1;
+                this.Direction = "left";
+            }
+            else if (tank.Direction == "right" && tank.X != boundaryX - 1)
+            {
+                this.x += 1;
+                this.Direction = "right";
+            }
+            Console.SetCursorPosition(x, y);
+            Console.Write(body);
         }
         public void MoveBullet()
         {
@@ -62,49 +82,32 @@ namespace Tanks
             switch (Direction)
             {
                 case "up":
-                    y -= 1;
+                    y -= y - 1 >= 0 ? 1 : 0;
                     break;
                 case "down":
-                    y += 1;
+                    y += y + 1 < boundaryY ? 1 : 0;
                     break;
                 case "left":
-                    x -= 1;
+                    x -= x - 1 >= 0 ? 1 : 0;
                     break;
                 case "right":
-                    x += 1;
+                    x += x + 1 < boundaryX ? 1 : 0;
                     break;
                 default:
                     break;
             }
             Remove();
         }
-
-        public void Draw(Tank tank)
+        public void Remove()
         {
-            x = tank.X;
-            y = tank.Y;
-            if (tank.Direction == "up" && tank.Y != 0)
+            if (((x == boundaryX-1) && Direction != "up" && Direction != "down") || (x == 0 && Direction != "up" && Direction != "down"))
             {
-                y -= 1;
-                this.Direction = "up";
+                isVisible = false;
             }
-            else if (tank.Direction == "down" && tank.Y != boundaryY - 1)
+            else if (((y == boundaryY-1) && Direction != "left"&& Direction != "right") || (y == 0 && Direction != "left" && Direction != "right"))
             {
-                y += 1;
-                this.Direction = "down";
+                isVisible = false;
             }
-            else if (tank.Direction == "left" && tank.X != 0)
-            {
-                x -= 1;
-                this.Direction = "left";
-            }
-            else if (tank.Direction == "right" && tank.X != boundaryX - 1)
-            {
-                x += 1;
-                this.Direction = "right";
-            }
-            Console.SetCursorPosition(x, y);
-            Console.Write(body);
         }
 
         public void Draw()
