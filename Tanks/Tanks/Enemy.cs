@@ -11,10 +11,11 @@ namespace Tanks
         private int x;
         private int y;
 
-        private int boundaryX;
-        private int boundaryY;
+        public int boundaryX;
+        public int boundaryY;
 
         private const string symbols = "O";
+        public string Direction = "up";
 
         public static List<ConsoleColor> PossibleColors = new List<ConsoleColor>
         {

@@ -32,7 +32,7 @@ namespace Tanks
                 int enemyPosition = random.Next(0, 3);
                 switch (enemyPosition)
                 {
-                    case 0: enemies[i] = new Enemy(0, 0); break;
+                    case 0: enemies[i] = new Enemy(0, 0); enemies[i].Direction=Enemy.PossibleDirections[random.Next(0, Enemy.PossibleDirections.Count)]; break;
                     case 1: enemies[i] = new Enemy(boundaryX / 2, 0); break;
                     case 2: enemies[i] = new Enemy(boundaryX - 1, 0); break;
                     default:break;
@@ -90,6 +90,47 @@ namespace Tanks
                         Bullet bullet = new Bullet();
                         bullet.Shoot(playerTank);
                         playerBullets.Add(bullet);
+                    }
+                }
+                for (int i = 0; i < enemies.Length; i++)
+                {
+                    if (random.Next(0, 2) != 0)
+                    {
+                        enemies[i].Direction = Enemy.PossibleDirections[random.Next(0, Enemy.PossibleDirections.Count)];
+                    }
+                    if (enemies[i].Direction == "left")
+                    {
+                        if (enemies[i].X - 1 >= 0)
+                        {
+                            enemies[i].X = enemies[i].X - 1;
+                        }
+                    }
+                    else if (enemies[i].Direction == "right")
+                    {
+                        if (enemies[i].X + 1 < boundaryX)
+                        {
+                            enemies[i].X = enemies[i].X + 1;
+                        }
+                    }
+                    else if (enemies[i].Direction == "up")
+                    {
+                        if (enemies[i].Y - 1 >= 0)
+                        {
+                            enemies[i].Y = enemies[i].Y - 1;
+                        }
+                    }
+                    else if (enemies[i].Direction == "down")
+                    {
+                        if (enemies[i].Y + 1 < boundaryY)
+                        {
+                            enemies[i].Y = enemies[i].Y + 1;
+                        }
+                    }
+                    if (random.Next(0, 3) != 0)
+                    {
+                        Bullet bullet = new Bullet();
+                        bullet.Shoot(enemies[i]);
+                        enemiesBullets.Add(bullet);
                     }
                 }
                 for (int i = 0; i < playerBullets.Count; i++)

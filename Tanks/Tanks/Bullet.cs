@@ -76,6 +76,35 @@ namespace Tanks
             Console.SetCursorPosition(x, y);
             Console.Write(body);
         }
+        public void Shoot(Enemy tank)
+        {
+            this.x = tank.X;
+            this.y = tank.Y;
+            this.boundaryX = tank.boundaryX;
+            this.boundaryY = tank.boundaryY;
+            if (tank.Direction == "up" && tank.Y != 0)
+            {
+                this.y -= 1;
+                this.Direction = "up";
+            }
+            else if (tank.Direction == "down" && tank.Y != boundaryY - 1)
+            {
+                this.y += 1;
+                this.Direction = "down";
+            }
+            else if (tank.Direction == "left" && tank.X != 0)
+            {
+                this.x -= 1;
+                this.Direction = "left";
+            }
+            else if (tank.Direction == "right" && tank.X != boundaryX - 1)
+            {
+                this.x += 1;
+                this.Direction = "right";
+            }
+            Console.SetCursorPosition(x, y);
+            Console.Write(body);
+        }
         public void MoveBullet()
         {
 
