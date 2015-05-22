@@ -9,27 +9,49 @@ namespace Tanks
 
     class Tanks
     {
-        const int GameMenuWidth = 30;
-        const int WindowHeight = 40;
+        const int GameMenuWidth = 20;
+        const int WindowHeight = 35;
         const int WindowWidth = 71;
         const int MaximumEnemies = 10;
+
         static void Main()
         {
-            Console.BufferHeight = Console.WindowHeight = 35;
-            Console.BufferWidth = Console.WindowWidth = 71;
+            Console.BufferHeight = Console.WindowHeight = WindowHeight;
+            Console.BufferWidth = Console.WindowWidth = WindowWidth;
             Console.OutputEncoding = Encoding.Unicode;
-            int boundaryX = 71;
-            int boundaryY = Console.BufferHeight;
             Console.CursorVisible = false;
-            Tank ourTank = new Tank(40, boundaryY);
-            Enemy newEnemy = new Enemy(0, 1);
-            Intro.FirstIntro();
-            Intro.SecondIntro();
+
+            int boundaryX = WindowWidth - GameMenuWidth;
+            int boundaryY = WindowHeight;
+
+            Random random = new Random();
+            Tank ourTank = new Tank(boundaryX, boundaryY);
+            Enemy[] enemies = new Enemy[MaximumEnemies];
+            for (int i = 0; i < enemies.Length; i++)
+            {
+                int enemyPosition = random.Next(0, 3);
+                switch (enemyPosition)
+                {
+                    case 0: enemies[i] = new Enemy(0, 0); break;
+                    case 1: enemies[i] = new Enemy(boundaryX / 2, 0); break;
+                    case 2: enemies[i] = new Enemy(boundaryX - 1, 0); break;
+                    default:break;
+                }
+            }
+
+            //Intro.FirstIntro();
+            //Intro.SecondIntro();
             //DrawGameMenu();
-            List<Bullet> bullets = new List<Bullet>();
+            List<Bullet> playerBullets = new List<Bullet>();
+            List<Bullet> enemiesBullets = new List<Bullet>();
+            //int reloadingTime = 0;
             while (true)
             {
                 DrawGameField();
+                for (int i = 0; i < boundaryY; i++)
+                {
+                    PrintOnPosition(boundaryX, i, "|", ConsoleColor.White);
+                }
                 while (Console.KeyAvailable)
                 {
                     ConsoleKeyInfo pressedKey = Console.ReadKey(true);
@@ -37,7 +59,7 @@ namespace Tanks
                     if (pressedKey.Key == ConsoleKey.LeftArrow)
                     {
                         ourTank.Direction = "left";
-                        if (ourTank.X - 1 > 0)
+                        if (ourTank.X - 1 >= 0)
                         {
                             ourTank.X = ourTank.X - 1;
                         }
@@ -45,7 +67,7 @@ namespace Tanks
                     else if (pressedKey.Key == ConsoleKey.RightArrow)
                     {
                         ourTank.Direction = "right";
-                        if (ourTank.X + 1 < 35)
+                        if (ourTank.X + 1 < boundaryX)
                         {
                             ourTank.X = ourTank.X + 1;
                         }
@@ -61,7 +83,7 @@ namespace Tanks
                     else if (pressedKey.Key == ConsoleKey.DownArrow)
                     {
                         ourTank.Direction = "down";
-                        if (ourTank.Y + 1 < 35)
+                        if (ourTank.Y + 1 < boundaryY)
                         {
                             ourTank.Y = ourTank.Y + 1;
                         }
@@ -70,22 +92,22 @@ namespace Tanks
                     {
                         Bullet bullet = new Bullet();
                         bullet.Draw(ourTank);
-                        bullets.Add(bullet);
+                        playerBullets.Add(bullet);
                     }
                 }
-                for (int i = 0; i < bullets.Count; i++)
+                for (int i = 0; i < playerBullets.Count; i++)
                 {
-                    if (bullets[i].isVisible)
+                    if (playerBullets[i].isVisible)
                     {
-                        bullets[i].MoveBullet();
-                        bullets[i].Draw();
+                        playerBullets[i].MoveBullet();
+                        playerBullets[i].Draw();
                     }
                     else
                     {
-                        bullets.Remove(bullets[i]);
+                        playerBullets.Remove(playerBullets[i]);
                     }
                 }
-                newEnemy.Draw();
+
                 ourTank.Draw();
                 Thread.Sleep(70);
                 Console.Clear();
@@ -100,18 +122,19 @@ namespace Tanks
         public static void DrawGameField()
         {
             Console.OutputEncoding = Encoding.Unicode;
-            StreamReader reader = new StreamReader(@"../../playfield.txt");
+            StreamReader reader = new StreamReader(@"..\..\res\playfield.txt");
             using (reader)
             {
+                int line = 0;
                 while (true)
                 {
-                    string introLine = reader.ReadLine();
-                    if (introLine == null)
+                    string fieldLine = reader.ReadLine();
+                    if (fieldLine == null)
                     {
                         break;
                     }
-
-                    Console.WriteLine(introLine);
+                   PrintOnPosition(0, line, fieldLine, ConsoleColor.DarkRed);
+                   line++;
                 }
             }
 

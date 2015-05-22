@@ -53,7 +53,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="tanks_intro.txt" />
+    <Content Include="res\A.txt" />
+    <Content Include="res\K.txt" />
+    <Content Include="res\N.txt" />
+    <Content Include="res\playfield.txt" />
+    <Content Include="res\S.txt" />
+    <Content Include="res\T.txt" />
+    <Content Include="res\tanks_intro.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

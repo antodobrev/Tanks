@@ -28,9 +28,9 @@ namespace Tanks
             this.livesLeft = 5;
             this.striked = false;
             this.boundaryX = BoundaryX;
-            this.boundaryX = BoundaryY;
-            this.x = BoundaryX / 2;
-            this.y = BoundaryY - 1;
+            this.boundaryY = BoundaryY;
+            this.x = boundaryX / 2;
+            this.y = boundaryY - 1;
         }
         public ConsoleColor Color
         {
@@ -131,6 +131,8 @@ namespace Tanks
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.SetCursorPosition(x, y);
                 Console.Write("X");
+                X = boundaryX / 2;
+                Y = boundaryY - 1;
             }
         }
     }

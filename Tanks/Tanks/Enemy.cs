@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Tanks
 {
-    class Enemy:GameObject
+    class Enemy : GameObject
     {
         private int x;
         private int y;
@@ -15,15 +15,24 @@ namespace Tanks
         private int boundaryY;
 
         private const string symbols = "O";
+
         public static List<ConsoleColor> PossibleColors = new List<ConsoleColor>
-            {
-                ConsoleColor.Red,
-                ConsoleColor.Blue,
-                ConsoleColor.DarkBlue,
-                ConsoleColor.DarkCyan,
-                ConsoleColor.DarkGreen
-            };
+        {
+          ConsoleColor.Red,
+          ConsoleColor.Blue,
+          ConsoleColor.DarkBlue,
+          ConsoleColor.DarkCyan,
+          ConsoleColor.DarkGreen
+        };
+        public static List<string> PossibleDirections = new List<string>
+        {
+            "up",
+            "down",
+            "left",
+            "right"
+        };
         private ConsoleColor color = PossibleColors[random.Next(0, PossibleColors.Count)];
+        private string direction = PossibleDirections[random.Next(0, PossibleDirections.Count)];
         public static Random random = new Random();
 
         private bool striked;
@@ -59,14 +68,16 @@ namespace Tanks
                 this.y = value;
             }
         }
+
         public Enemy(int BoundaryX, int BoundaryY)
         {
             this.striked = false;
             this.boundaryX = BoundaryX;
-            this.boundaryX = BoundaryY;
+            this.boundaryY = BoundaryY;
             this.x = boundaryX;
             this.y = boundaryY;
         }
+
         public void MoveRight()
         {
             if (x + 1 < boundaryX)
@@ -95,6 +106,7 @@ namespace Tanks
                 x++;
             }
         }
+
         public void Draw()
         {
             if (!striked)

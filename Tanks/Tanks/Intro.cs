@@ -9,7 +9,7 @@ namespace Tanks
     {
         public static void FirstIntro()
         {
-            using (StreamReader reader = new StreamReader(@"..\..\T.txt"))
+            using (StreamReader reader = new StreamReader(@"..\..\res\T.txt"))
             {
                 string line = reader.ReadLine();
                 while (line != null)
@@ -20,7 +20,7 @@ namespace Tanks
             }
             Thread.Sleep(1000);
             Console.Clear();
-            using (StreamReader reader = new StreamReader(@"..\..\A.txt"))
+            using (StreamReader reader = new StreamReader(@"..\..\res\A.txt"))
             {
                 string line = reader.ReadLine();
                 while (line != null)
@@ -31,7 +31,7 @@ namespace Tanks
             }
             Thread.Sleep(1000);
             Console.Clear();
-            using (StreamReader reader = new StreamReader(@"..\..\N.txt"))
+            using (StreamReader reader = new StreamReader(@"..\..\res\N.txt"))
             {
                 string line = reader.ReadLine();
                 while (line != null)
@@ -42,7 +42,7 @@ namespace Tanks
             }
             Thread.Sleep(1000);
             Console.Clear();
-            using (StreamReader reader = new StreamReader(@"..\..\K.txt"))
+            using (StreamReader reader = new StreamReader(@"..\..\res\K.txt"))
             {
                 string line = reader.ReadLine();
                 while (line != null)
@@ -53,7 +53,7 @@ namespace Tanks
             }
             Thread.Sleep(1000);
             Console.Clear();
-            using (StreamReader reader = new StreamReader(@"..\..\S.txt"))
+            using (StreamReader reader = new StreamReader(@"..\..\res\S.txt"))
             {
                 string line = reader.ReadLine();
                 while (line != null)
@@ -68,7 +68,7 @@ namespace Tanks
         public static void SecondIntro()
         {
             Console.OutputEncoding = Encoding.Unicode;
-            StreamReader reader = new StreamReader(@"../../tanks_intro.txt");
+            StreamReader reader = new StreamReader(@"..\..\res\tanks_intro.txt");
             using (reader)
             {
                 while (true)
