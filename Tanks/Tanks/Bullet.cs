@@ -102,8 +102,12 @@ namespace Tanks
                 this.x += 1;
                 this.Direction = "right";
             }
-            Console.SetCursorPosition(x, y);
-            Console.Write(body);
+            if (this.Direction != "")
+            {
+                Console.SetCursorPosition(x, y);
+                Console.Write(body);
+            }
+
         }
         public void MoveBullet()
         {
@@ -114,7 +118,7 @@ namespace Tanks
                     y -= y - 1 >= 0 ? 1 : 0;
                     break;
                 case "down":
-                    y += y + 1 < boundaryY ? 1 : 0;
+                    y += (y + 1 < boundaryY) ? 1 : 0;
                     break;
                 case "left":
                     x -= x - 1 >= 0 ? 1 : 0;

@@ -11,8 +11,8 @@ namespace Tanks
         private int x;
         private int y;
 
-        public int boundaryX;
-        public int boundaryY;
+        public int boundaryX = Tanks.WindowWidth - Tanks.GameMenuWidth;
+        public int boundaryY = Tanks.WindowHeight;
 
         private const string symbols = "O";
         private const ConsoleColor color = ConsoleColor.Yellow;
@@ -23,14 +23,14 @@ namespace Tanks
 
         public string Direction = "up";
 
-        public Tank(int BoundaryX, int BoundaryY)
+        public Tank(int initX, int initY)
         {
             this.livesLeft = 5;
             this.striked = false;
-            this.boundaryX = BoundaryX;
-            this.boundaryY = BoundaryY;
-            this.x = boundaryX / 2;
-            this.y = boundaryY - 1;
+            //this.boundaryX = BoundaryX;
+            //this.boundaryY = BoundaryY;
+            this.x = initX / 2;
+            this.y = initY - 1;
         }
         public ConsoleColor Color
         {

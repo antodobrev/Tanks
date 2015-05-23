@@ -9,10 +9,10 @@ namespace Tanks
 
     class Tanks
     {
-        const int GameMenuWidth = 20;
-        const int WindowHeight = 35;
-        const int WindowWidth = 71;
-        const int MaximumEnemies = 10;
+        public const int GameMenuWidth = 20;
+        public const int WindowHeight = 35;
+        public const int WindowWidth = 71;
+        public const int MaximumEnemies = 10;
 
         static void Main()
         {
@@ -126,32 +126,43 @@ namespace Tanks
                             enemies[i].Y = enemies[i].Y + 1;
                         }
                     }
-                    if (random.Next(0, 3) != 0)
+                    if (random.Next(0, 3) != 0 && enemiesBullets.Count < 10)
                     {
                         Bullet bullet = new Bullet();
                         bullet.Shoot(enemies[i]);
-                        enemiesBullets.Add(bullet);
+                        if (bullet.Direction != "")
+                        {
+                            enemiesBullets.Add(bullet);
+                        }
+                        
                     }
                 }
-                for (int i = 0; i < playerBullets.Count; i++)
-                {
-                    if (playerBullets[i].isVisible)
-                    {
-                        playerBullets[i].MoveBullet();
-                        playerBullets[i].Draw();
-                    }
-                    if (!playerBullets[i].isVisible)
-                    {
-                        playerBullets.Remove(playerBullets[i]);
-                    }
-                }
+
                 playerTank.Draw();
                 for (int i = 0; i < enemies.Length; i++)
                 {
                     enemies[i].Draw();
                 }
+                MoveBulletInField(playerBullets);
+                MoveBulletInField(enemiesBullets);
                 Thread.Sleep(70);
                 Console.Clear();
+            }
+        }
+
+        private static void MoveBulletInField(List<Bullet> playerBullets)
+        {
+            for (int i = 0; i < playerBullets.Count; i++)
+            {
+                if (playerBullets[i].isVisible)
+                {
+                    playerBullets[i].MoveBullet();
+                    playerBullets[i].Draw();
+                }
+                if (!playerBullets[i].isVisible)
+                {
+                    playerBullets.Remove(playerBullets[i]);
+                }
             }
         }
 
