@@ -11,8 +11,8 @@ namespace Tanks
         private int x;
         private int y;
 
-        public int boundaryX;
-        public int boundaryY;
+        public int boundaryX = Tanks.WindowWidth - Tanks.GameMenuWidth;
+        public int boundaryY = Tanks.WindowHeight;
 
         private const string symbols = "O";
         public string Direction = "up";
@@ -70,13 +70,13 @@ namespace Tanks
             }
         }
 
-        public Enemy(int BoundaryX, int BoundaryY)
+        public Enemy(int initX, int initY)
         {
             this.striked = false;
-            this.boundaryX = BoundaryX;
-            this.boundaryY = BoundaryY;
-            this.x = boundaryX;
-            this.y = boundaryY;
+            //this.boundaryX = BoundaryX;
+            //this.boundaryY = BoundaryY;
+            this.x = initX;
+            this.y = initY;
         }
 
         public void MoveRight()

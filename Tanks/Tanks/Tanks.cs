@@ -126,7 +126,7 @@ namespace Tanks
                             enemies[i].Y = enemies[i].Y + 1;
                         }
                     }
-                    if (random.Next(0, 3) != 0 && enemiesBullets.Count < 10)
+                    if (random.Next(0, 20) == 0 && enemiesBullets.Count < 10)
                     {
                         Bullet bullet = new Bullet();
                         bullet.Shoot(enemies[i]);
