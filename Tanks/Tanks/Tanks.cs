@@ -43,11 +43,15 @@ namespace Tanks
             //Intro.SecondIntro();
             List<Bullet> playerBullets = new List<Bullet>();
             List<Bullet> enemiesBullets = new List<Bullet>();
+            List<Bricks.Brick> bricks = BricksPositions();
             //int reloadingTime = 0;
             while (true)
             {
-                DrawGameField();
+                DrawBricks(bricks);
                 DrawGameMenu();
+                //Test for ruined brick
+                //takes x and y, where the bullet hits the brick, and makes brick.Ruined true.
+                //bricks = FindRuinedBrick(bricks, 10, 12);
                 DrawBorder(boundaryX, boundaryY);
                 while (Console.KeyAvailable)
                 {
@@ -180,30 +184,102 @@ namespace Tanks
             Console.ForegroundColor = color;
             Console.Write(str);
         }
-        public static void DrawGameField()
-        {
-            Console.OutputEncoding = Encoding.Unicode;
-            StreamReader reader = new StreamReader(@"..\..\res\playfield.txt");
-            using (reader)
-            {
-                int line = 0;
-                while (true)
-                {
-                    string fieldLine = reader.ReadLine();
-                    if (fieldLine == null)
-                    {
-                        break;
-                    }
-                   PrintOnPosition(0, line, fieldLine, ConsoleColor.DarkRed);
-                   line++;
-                }
-            }
 
-            Console.WriteLine();
-        }
         private static void DrawGameMenu()
         {
             PrintOnPosition(53, 5, "Score:", ConsoleColor.Magenta);
+        }
+
+        private static void DrawBricks(List<Bricks.Brick> bricks)
+        {
+            foreach (Bricks.Brick brick in bricks)
+            {
+                if (brick.Ruined == false)
+                {
+                    PrintOnPosition(brick.X, brick.Y, brick.Symbol, brick.Color);
+                }
+            }
+        }
+
+        public static List<Bricks.Brick> BricksPositions()
+        {
+
+            List<Bricks.Brick> bricksPositions = new List<Bricks.Brick>();
+
+            for (int i = 7; i < 45; i++)
+            {
+                Bricks.Brick brick = new Bricks.Brick
+                {
+                    X = i,
+                    Y = 12
+                };
+                bricksPositions.Add(brick);
+            }
+
+            for (int i = 8; i < 28; i++)
+            {
+                Bricks.Brick brick = new Bricks.Brick
+                {
+                    X = 25,
+                    Y = i
+                };
+                bricksPositions.Add(brick);
+            }
+
+            for (int i = 1; i < 15; i++)
+            {
+                Bricks.Brick brick = new Bricks.Brick
+                {
+                    X = i,
+                    Y = 7
+                };
+                bricksPositions.Add(brick);
+            }
+
+            for (int i = 2; i < 11; i++)
+            {
+                Bricks.Brick brick = new Bricks.Brick
+                {
+                    X = 15,
+                    Y = i
+                };
+                bricksPositions.Add(brick);
+            }
+
+            for (int i = 6; i < 39; i++)
+            {
+                Bricks.Brick brick = new Bricks.Brick
+                {
+                    X = i,
+                    Y = 30
+                };
+                bricksPositions.Add(brick);
+            }
+
+            for (int i = 27; i < 49; i++)
+            {
+                Bricks.Brick brick = new Bricks.Brick
+                {
+                    X = i,
+                    Y = 25
+                };
+                bricksPositions.Add(brick);
+            }
+
+            return bricksPositions;
+        }
+
+        public static List<Bricks.Brick> FindRuinedBrick(List<Bricks.Brick> bricks, int x, int y)
+        {
+            foreach (var brick in bricks)
+            {
+                if (brick.Y == y && brick.X == x)
+                {
+                    brick.Ruined = true;
+                    return bricks;
+                }
+            }
+            return bricks;
         }
     }
 }
