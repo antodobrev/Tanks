@@ -147,10 +147,29 @@ namespace Tanks
                 {
                     enemies[i].Draw();
                 }
+                DetectCollitionWithBullet(enemiesBullets, bricks);
+                DetectCollitionWithBullet(playerBullets, bricks);
                 MoveBulletInField(playerBullets);
                 MoveBulletInField(enemiesBullets);
+
+                RemoveRuinedBrick(bricks);
                 Thread.Sleep(70);
                 Console.Clear();
+            }
+        }
+
+        public static void DetectCollitionWithBullet(List<Bullet> enemiesBullets, List<Bricks.Brick> bricks)
+        {
+            foreach (var brick in bricks)
+            {
+                foreach (var bullet in enemiesBullets)
+                {
+                    if (brick.X == bullet.X && brick.Y == bullet.Y)
+                    {
+                        brick.Ruined = true;
+                        bullet.isVisible = false;
+                    }
+                }
             }
         }
 
@@ -269,14 +288,13 @@ namespace Tanks
             return bricksPositions;
         }
 
-        public static List<Bricks.Brick> FindRuinedBrick(List<Bricks.Brick> bricks, int x, int y)
+        public static List<Bricks.Brick> RemoveRuinedBrick(List<Bricks.Brick> bricks)
         {
-            foreach (var brick in bricks)
+            for (int i = 0; i < bricks.Count; i++)
             {
-                if (brick.Y == y && brick.X == x)
+                if (bricks[i].Ruined)
                 {
-                    brick.Ruined = true;
-                    return bricks;
+                    bricks.Remove(bricks[i]);
                 }
             }
             return bricks;
