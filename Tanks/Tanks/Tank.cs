@@ -111,6 +111,10 @@ namespace Tanks
             {
                 return livesLeft;
             }
+            set
+            {
+                livesLeft = value;
+            }
         }
         public void MoveRight()
         {
@@ -165,13 +169,13 @@ namespace Tanks
                 Console.Write("X");
                 Console.SetCursorPosition(prevX, prevY);
                 Console.Write(' ');
-                livesLeft--;
+
                 striked = false;
                 X = boundaryX / 2;
                 Y = boundaryY - 1;
             }
         }
-        public void CheckIfHit(List<Bullet> bullets) 
+        public void CheckIfHit(List<Bullet> bullets)
         {
             foreach (var bullet in bullets)
             {
@@ -179,6 +183,7 @@ namespace Tanks
                 {
                     this.striked = true;
                     bullets.Remove(bullet);
+                    livesLeft--;
                     break;
                 }
             }

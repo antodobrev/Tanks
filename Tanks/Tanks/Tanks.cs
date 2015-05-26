@@ -18,6 +18,8 @@ namespace Tanks
             Console.BufferHeight = Console.WindowHeight = WindowHeight;
             Console.BufferWidth = Console.WindowWidth = WindowWidth;
             Console.OutputEncoding = Encoding.Unicode;
+            Console.BackgroundColor = ConsoleColor.Gray;
+            Console.Clear();
             Console.CursorVisible = false;
 
             int boundaryX = WindowWidth - GameMenuWidth;
@@ -25,15 +27,15 @@ namespace Tanks
 
             Random random = new Random();
             Tank playerTank = new Tank(boundaryX, boundaryY);
-            Enemy[] enemies = new Enemy[MaximumEnemies];
-            for (int i = 0; i < enemies.Length; i++)
+            List<Enemy> enemies = new List<Enemy>();
+            for (int i = 0; i < MaximumEnemies; i++)
             {
                 int enemyPosition = random.Next(0, 3);
                 switch (enemyPosition)
                 {
-                    case 0: enemies[i] = new Enemy(0, 0); enemies[i].Direction = Enemy.PossibleDirections[random.Next(0, Enemy.PossibleDirections.Count)]; break;
-                    case 1: enemies[i] = new Enemy(boundaryX / 2, 0); break;
-                    case 2: enemies[i] = new Enemy(boundaryX - 1, 0); break;
+                    case 0: enemies.Add(new Enemy(0, 0)); break;
+                    case 1: enemies.Add(new Enemy(boundaryX / 2, 0)); break;
+                    case 2: enemies.Add(new Enemy(boundaryX - 1, 0)); break;
                     default: break;
                 }
             }
@@ -44,10 +46,10 @@ namespace Tanks
             List<Bullet> enemiesBullets = new List<Bullet>();
             List<Brick> bricks = BricksPositions();
             DrawBorder(boundaryX, boundaryY);
+            DrawBricks(bricks);
             //int reloadingTime = 0;
             while (true)
             {
-                DrawBricks(bricks);
                 DrawGameMenu();
                 //Test for ruined brick
                 //takes x and y, where the bullet hits the brick, and makes brick.Ruined true.
@@ -84,7 +86,7 @@ namespace Tanks
                         playerBullets.Add(bullet);
                     }
                 }
-                for (int i = 0; i < enemies.Length; i++)
+                for (int i = 0; i < enemies.Count; i++)
                 {
                     if (random.Next(0, 2) != 0)
                     {
@@ -95,7 +97,7 @@ namespace Tanks
                         case "left": enemies[i].MoveLeft(); break;
                         case "right": enemies[i].MoveRight(); break;
                         case "up": enemies[i].MoveUp(); break;
-                        case "down": enemies[i].MoveDown();break;
+                        case "down": enemies[i].MoveDown(); break;
                         default: break;
                     }
 
@@ -111,7 +113,7 @@ namespace Tanks
                 }
 
                 playerTank.Draw();
-                for (int i = 0; i < enemies.Length; i++)
+                for (int i = 0; i < enemies.Count; i++)
                 {
                     enemies[i].Draw();
                 }
@@ -120,9 +122,25 @@ namespace Tanks
                 MoveBulletInField(playerBullets);
                 MoveBulletInField(enemiesBullets);
                 playerTank.CheckIfHit(enemiesBullets);
+                for (int i = 0; i < enemies.Count; i++)
+                {
+                    enemies[i].CheckIfHit(playerBullets);
+                    if (enemies[i].Striked)
+                    {
+                        enemies.Remove(enemies[i]);
+                    }
+                }
 
                 RemoveRuinedBrick(bricks);
-                Thread.Sleep(70);
+                if (Tank.LivesLeft < 0)
+                {
+                    Console.Clear();
+                    Console.Beep(625, 225);
+                    PrintOnPosition(31, boundaryY/2, "GAME OVER", ConsoleColor.Red);
+                    Console.ReadLine();
+                        Environment.Exit(0);
+                }
+                Thread.Sleep(100);
                 //Console.Clear();
             }
         }

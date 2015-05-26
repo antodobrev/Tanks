@@ -92,7 +92,17 @@ namespace Tanks
                 this.prevY = value;
             }
         }
-
+        public bool Striked
+        {
+            get
+            {
+                return this.striked;
+            }
+            set
+            {
+                this.striked = value;
+            }
+        }
         public Enemy(int initX, int initY)
         {
             this.striked = false;
@@ -136,7 +146,18 @@ namespace Tanks
                 y++;
             }
         }
-
+        public void CheckIfHit(List<Bullet> bullets)
+        {
+            foreach (var bullet in bullets)
+            {
+                if (bullet.X == this.X && bullet.Y == this.Y)
+                {
+                    this.striked = true;
+                    bullets.Remove(bullet);
+                    break;
+                }
+            }
+        }
         public void Draw()
         {
             if (!striked)
