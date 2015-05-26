@@ -157,7 +157,7 @@ namespace Tanks
             }
         }
 
-        public static void DetectCollitionWithBullet(List<Bullet> enemiesBullets, List<Bricks.Brick> bricks)
+        public static void DetectCollitionWithBullet(List<Bullet> enemiesBullets, List<Brick> bricks)
         {
             foreach (var brick in bricks)
             {
@@ -287,11 +287,7 @@ namespace Tanks
             return bricksPositions;
         }
 
-<<<<<<< HEAD
-        public static List<Brick> FindRuinedBrick(List<Brick> bricks, int x, int y)
-=======
-        public static List<Bricks.Brick> RemoveRuinedBrick(List<Bricks.Brick> bricks)
->>>>>>> 4f50a2b8f2cff3bc04a7a0c61b27eb3cc0a7d1c6
+        public static List<Brick> RemoveRuinedBrick(List<Brick> bricks)
         {
             for (int i = 0; i < bricks.Count; i++)
             {
