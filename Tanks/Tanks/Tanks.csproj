@@ -46,6 +46,7 @@
     <Compile Include="Enemy.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="Intro.cs" />
+    <Compile Include="ScoreList.cs" />
     <Compile Include="Tank.cs" />
     <Compile Include="Tanks.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

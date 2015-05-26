@@ -12,7 +12,7 @@ namespace Tanks
         public const int WindowHeight = 35;
         public const int WindowWidth = 71;
         public const int MaximumEnemies = 10;
-        public static ulong score = 0;
+        public static int score = 0;
 
         static void Main()
         {
@@ -156,14 +156,16 @@ namespace Tanks
                     Console.Clear();
                     Console.Beep(625, 225);
                     PrintOnPosition(31, boundaryY / 2, "GAME OVER", ConsoleColor.Red);
+                    ScoreList.Score(score);
                     Console.ReadLine();
                     Environment.Exit(0);
                 }
                 if (enemies.Count == 0)
                 {
                         Console.Clear();
-                        Console.Beep(625, 225);
+                         Console.Beep(625, 225);
                         PrintOnPosition(32, boundaryY / 2, "YOU WIN", ConsoleColor.Red);
+                        ScoreList.Score(score);
                         Console.ReadLine();
                         Environment.Exit(0);
                 }
