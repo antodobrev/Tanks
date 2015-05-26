@@ -190,5 +190,58 @@ namespace Tanks
                 }
             }
         }
+
+        public bool CheckLeftCell(List<Brick> bricks)
+        {
+            bool isEmpty = true;
+            foreach (var brick in bricks)
+            {
+                if (x - 1 == brick.X && y == brick.Y)
+                {
+                    isEmpty = false;
+                    break;
+                }
+            }
+            return isEmpty;
+        }
+        public bool CheckRightCell(List<Brick> bricks)
+        {
+            bool isEmpty = true;
+            foreach (var brick in bricks)
+            {
+                if (x + 1 == brick.X && y == brick.Y)
+                {
+                    isEmpty = false;
+                    break;
+                }
+            }
+            return isEmpty;
+        }
+        public bool CheckDownCell(List<Brick> bricks)
+        {
+            bool isEmpty = true;
+            foreach (var brick in bricks)
+            {
+                if (x == brick.X && y + 1 == brick.Y)
+                {
+                    isEmpty = false;
+                    break;
+                }
+            }
+            return isEmpty;
+        }
+        public bool CheckUpCell(List<Brick> bricks)
+        {
+            bool isEmpty = true;
+            foreach (var brick in bricks)
+            {
+                if (x == brick.X && y - 1 == brick.Y)
+                {
+                    isEmpty = false;
+                    break;
+                }
+            }
+            return isEmpty;
+        }
     }
 }

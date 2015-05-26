@@ -60,22 +60,26 @@ namespace Tanks
                     if (pressedKey.Key == ConsoleKey.LeftArrow)
                     {
                         playerTank.Direction = "left";
-                        playerTank.MoveLeft();
+                        if (playerTank.CheckLeftCell(bricks))
+                            playerTank.MoveLeft();
                     }
                     else if (pressedKey.Key == ConsoleKey.RightArrow)
                     {
                         playerTank.Direction = "right";
-                        playerTank.MoveRight();
+                        if (playerTank.CheckRightCell(bricks))
+                            playerTank.MoveRight();
                     }
                     else if (pressedKey.Key == ConsoleKey.UpArrow)
                     {
                         playerTank.Direction = "up";
-                        playerTank.MoveUp();
+                        if (playerTank.CheckUpCell(bricks))
+                            playerTank.MoveUp();
                     }
                     else if (pressedKey.Key == ConsoleKey.DownArrow)
                     {
                         playerTank.Direction = "down";
-                        playerTank.MoveDown();
+                        if (playerTank.CheckDownCell(bricks))
+                            playerTank.MoveDown();
                     }
                     else if (pressedKey.Key == ConsoleKey.Spacebar)
                     {
@@ -92,10 +96,18 @@ namespace Tanks
                     }
                     switch (enemies[i].Direction)
                     {
-                        case "left": enemies[i].MoveLeft(); break;
-                        case "right": enemies[i].MoveRight(); break;
-                        case "up": enemies[i].MoveUp(); break;
-                        case "down": enemies[i].MoveDown(); break;
+                        case "left": 
+                            if (enemies[i].CheckLeftCell(bricks))
+                                enemies[i].MoveLeft(); break;
+                        case "right":
+                            if (enemies[i].CheckRightCell(bricks))
+                                enemies[i].MoveRight(); break;
+                        case "up":
+                            if (enemies[i].CheckUpCell(bricks))
+                                enemies[i].MoveUp(); break;
+                        case "down":
+                            if (enemies[i].CheckDownCell(bricks))
+                                enemies[i].MoveDown(); break;
                         default: break;
                     }
 
