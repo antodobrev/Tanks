@@ -154,7 +154,7 @@ namespace Tanks
                 {
                     Console.SetCursorPosition(bullets[i].X, bullets[i].Y);
                     Console.Write(' ');
-
+                    bullets.Remove(bullets[i]);
                 }
             }
         }

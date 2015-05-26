@@ -171,11 +171,11 @@ namespace Tanks
         }
         public void Remove()
         {
-            if (((x == boundaryX) && Direction != "up" && Direction != "down") || (x == 0 && Direction != "up" && Direction != "down"))
+            if (((x == boundaryX - 1) && Direction != "up" && Direction != "down") || (x == 0 && Direction != "up" && Direction != "down"))
             {
                 isVisible = false;
             }
-            else if (((y == boundaryY) && Direction != "left"&& Direction != "right") || (y == 0 && Direction != "left" && Direction != "right"))
+            else if (((y == boundaryY -1) && Direction != "left"&& Direction != "right") || (y == 0 && Direction != "left" && Direction != "right"))
             {
                 isVisible = false;
             }
