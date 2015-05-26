@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Tanks
 {
@@ -165,8 +166,21 @@ namespace Tanks
                 Console.SetCursorPosition(prevX, prevY);
                 Console.Write(' ');
                 livesLeft--;
+                striked = false;
                 X = boundaryX / 2;
                 Y = boundaryY - 1;
+            }
+        }
+        public void CheckIfHit(List<Bullet> bullets) 
+        {
+            foreach (var bullet in bullets)
+            {
+                if (bullet.X == this.X && bullet.Y == this.Y)
+                {
+                    this.striked = true;
+                    bullets.Remove(bullet);
+                    break;
+                }
             }
         }
     }

@@ -119,6 +119,7 @@ namespace Tanks
                 DetectCollitionWithBullet(playerBullets, bricks);
                 MoveBulletInField(playerBullets);
                 MoveBulletInField(enemiesBullets);
+                playerTank.CheckIfHit(enemiesBullets);
 
                 RemoveRuinedBrick(bricks);
                 Thread.Sleep(70);
