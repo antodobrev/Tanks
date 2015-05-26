@@ -12,14 +12,13 @@ namespace Tanks
         public const int WindowHeight = 35;
         public const int WindowWidth = 71;
         public const int MaximumEnemies = 10;
+        public static ulong score = 0;
 
         static void Main()
         {
             Console.BufferHeight = Console.WindowHeight = WindowHeight;
             Console.BufferWidth = Console.WindowWidth = WindowWidth;
             Console.OutputEncoding = Encoding.Unicode;
-            Console.BackgroundColor = ConsoleColor.Gray;
-            Console.Clear();
             Console.CursorVisible = false;
 
             int boundaryX = WindowWidth - GameMenuWidth;
@@ -39,7 +38,6 @@ namespace Tanks
                     default: break;
                 }
             }
-
             //Intro.FirstIntro();
             //Intro.SecondIntro();
             List<Bullet> playerBullets = new List<Bullet>();
@@ -127,6 +125,15 @@ namespace Tanks
                     enemies[i].CheckIfHit(playerBullets);
                     if (enemies[i].Striked)
                     {
+                        switch (enemies[i].Color)
+                        {
+                            case ConsoleColor.Blue: score += 200; break;
+                            case ConsoleColor.DarkBlue: score += 250; break;
+                            case ConsoleColor.DarkCyan: score += 300; break;
+                            case ConsoleColor.DarkGreen: score += 350; break;
+                            case ConsoleColor.Green: score += 400; break;
+                            default: break;
+                        }
                         enemies.Remove(enemies[i]);
                     }
                 }
@@ -136,8 +143,16 @@ namespace Tanks
                 {
                     Console.Clear();
                     Console.Beep(625, 225);
-                    PrintOnPosition(31, boundaryY/2, "GAME OVER", ConsoleColor.Red);
+                    PrintOnPosition(31, boundaryY / 2, "GAME OVER", ConsoleColor.Red);
                     Console.ReadLine();
+                    Environment.Exit(0);
+                }
+                if (enemies.Count == 0)
+                {
+                        Console.Clear();
+                        Console.Beep(625, 225);
+                        PrintOnPosition(32, boundaryY / 2, "YOU WIN", ConsoleColor.Red);
+                        Console.ReadLine();
                         Environment.Exit(0);
                 }
                 Thread.Sleep(100);
@@ -195,7 +210,7 @@ namespace Tanks
 
         private static void DrawGameMenu()
         {
-            PrintOnPosition(53, 5, "Score:", ConsoleColor.Magenta);
+            PrintOnPosition(53, 5, string.Format("Score: {0}", score), ConsoleColor.Magenta);
             PrintOnPosition(53, 7, string.Format("Lives: {0}", Tank.LivesLeft), ConsoleColor.Magenta);
         }
 

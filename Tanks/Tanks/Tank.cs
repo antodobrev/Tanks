@@ -169,10 +169,12 @@ namespace Tanks
                 Console.Write("X");
                 Console.SetCursorPosition(prevX, prevY);
                 Console.Write(' ');
-
+                
                 striked = false;
-                X = boundaryX / 2;
-                Y = boundaryY - 1;
+                this.prevX = x;
+                this.prevY = y;
+                this.x = boundaryX / 2;
+                this.y = boundaryY - 1;
             }
         }
         public void CheckIfHit(List<Bullet> bullets)
