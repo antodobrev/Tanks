@@ -43,6 +43,7 @@ namespace Tanks
             List<Bullet> playerBullets = new List<Bullet>();
             List<Bullet> enemiesBullets = new List<Bullet>();
             List<Brick> bricks = BricksPositions();
+            DrawBorder(boundaryX, boundaryY);
             //int reloadingTime = 0;
             while (true)
             {
@@ -51,7 +52,7 @@ namespace Tanks
                 //Test for ruined brick
                 //takes x and y, where the bullet hits the brick, and makes brick.Ruined true.
                 //bricks = FindRuinedBrick(bricks, 10, 12);
-                DrawBorder(boundaryX, boundaryY);
+
                 while (Console.KeyAvailable)
                 {
                     ConsoleKeyInfo pressedKey = Console.ReadKey(true);
