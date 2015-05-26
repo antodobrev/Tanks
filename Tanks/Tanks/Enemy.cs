@@ -11,6 +11,9 @@ namespace Tanks
         private int x;
         private int y;
 
+        private int prevX;
+        private int prevY;
+
         public int boundaryX = Tanks.WindowWidth - Tanks.GameMenuWidth;
         public int boundaryY = Tanks.WindowHeight;
 
@@ -69,12 +72,33 @@ namespace Tanks
                 this.y = value;
             }
         }
+        public int PrevX
+        {
+            get
+            {
+                return this.prevX;
+            }
+            set
+            {
+                this.prevX = value;
+            }
+        }
+
+        public int PrevY
+        {
+            get
+            {
+                return this.prevY;
+            }
+            set
+            {
+                this.prevY = value;
+            }
+        }
 
         public Enemy(int initX, int initY)
         {
             this.striked = false;
-            //this.boundaryX = BoundaryX;
-            //this.boundaryY = BoundaryY;
             this.x = initX;
             this.y = initY;
         }
@@ -83,6 +107,8 @@ namespace Tanks
         {
             if (x + 1 < boundaryX)
             {
+                prevX = x;
+                prevY = y;
                 x++;
             }
         }
@@ -90,6 +116,8 @@ namespace Tanks
         {
             if (x - 1 >= 0)
             {
+                prevX = x;
+                prevY = y;
                 x--;
             }
         }
@@ -97,14 +125,18 @@ namespace Tanks
         {
             if (y - 1 > 0)
             {
-                x--;
+                prevX = x;
+                prevY = y;
+                y--;
             }
         }
         public void MoveDown()
         {
             if (y + 1 < boundaryY)
             {
-                x++;
+                prevX = x;
+                prevY = y;
+                y++;
             }
         }
 
@@ -115,6 +147,8 @@ namespace Tanks
                 Console.ForegroundColor = color;
                 Console.SetCursorPosition(x, y);
                 Console.Write(symbols);
+                Console.SetCursorPosition(prevX, prevY);
+                Console.Write(' ');
             }
             else
             {

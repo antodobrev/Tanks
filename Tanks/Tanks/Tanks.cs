@@ -59,34 +59,22 @@ namespace Tanks
                     if (pressedKey.Key == ConsoleKey.LeftArrow)
                     {
                         playerTank.Direction = "left";
-                        if (playerTank.X - 1 >= 0)
-                        {
-                            playerTank.X = playerTank.X - 1;
-                        }
+                        playerTank.MoveLeft();
                     }
                     else if (pressedKey.Key == ConsoleKey.RightArrow)
                     {
                         playerTank.Direction = "right";
-                        if (playerTank.X + 1 < boundaryX)
-                        {
-                            playerTank.X = playerTank.X + 1;
-                        }
+                        playerTank.MoveRight();
                     }
                     else if (pressedKey.Key == ConsoleKey.UpArrow)
                     {
                         playerTank.Direction = "up";
-                        if (playerTank.Y - 1 >= 0)
-                        {
-                            playerTank.Y = playerTank.Y - 1;
-                        }
+                        playerTank.MoveUp();
                     }
                     else if (pressedKey.Key == ConsoleKey.DownArrow)
                     {
                         playerTank.Direction = "down";
-                        if (playerTank.Y + 1 < boundaryY)
-                        {
-                            playerTank.Y = playerTank.Y + 1;
-                        }
+                        playerTank.MoveDown();
                     }
                     else if (pressedKey.Key == ConsoleKey.Spacebar)
                     {
@@ -101,34 +89,15 @@ namespace Tanks
                     {
                         enemies[i].Direction = Enemy.PossibleDirections[random.Next(0, Enemy.PossibleDirections.Count)];
                     }
-                    if (enemies[i].Direction == "left")
+                    switch (enemies[i].Direction)
                     {
-                        if (enemies[i].X - 1 >= 0)
-                        {
-                            enemies[i].X = enemies[i].X - 1;
-                        }
+                        case "left": enemies[i].MoveLeft(); break;
+                        case "right": enemies[i].MoveRight(); break;
+                        case "up": enemies[i].MoveUp(); break;
+                        case "down": enemies[i].MoveDown();break;
+                        default: break;
                     }
-                    else if (enemies[i].Direction == "right")
-                    {
-                        if (enemies[i].X + 1 < boundaryX)
-                        {
-                            enemies[i].X = enemies[i].X + 1;
-                        }
-                    }
-                    else if (enemies[i].Direction == "up")
-                    {
-                        if (enemies[i].Y - 1 >= 0)
-                        {
-                            enemies[i].Y = enemies[i].Y - 1;
-                        }
-                    }
-                    else if (enemies[i].Direction == "down")
-                    {
-                        if (enemies[i].Y + 1 < boundaryY)
-                        {
-                            enemies[i].Y = enemies[i].Y + 1;
-                        }
-                    }
+
                     if (random.Next(0, 20) == 0 && enemiesBullets.Count < 10)
                     {
                         Bullet bullet = new Bullet();
@@ -137,7 +106,6 @@ namespace Tanks
                         {
                             enemiesBullets.Add(bullet);
                         }
-
                     }
                 }
 
@@ -153,7 +121,7 @@ namespace Tanks
 
                 RemoveRuinedBrick(bricks);
                 Thread.Sleep(70);
-                Console.Clear();
+                //Console.Clear();
             }
         }
 
@@ -172,18 +140,20 @@ namespace Tanks
             }
         }
 
-        private static void MoveBulletInField(List<Bullet> playerBullets)
+        private static void MoveBulletInField(List<Bullet> bullets)
         {
-            for (int i = 0; i < playerBullets.Count; i++)
+            for (int i = 0; i < bullets.Count; i++)
             {
-                if (playerBullets[i].isVisible)
+                if (bullets[i].isVisible)
                 {
-                    playerBullets[i].MoveBullet();
-                    playerBullets[i].Draw();
+                    bullets[i].MoveBullet();
+                    bullets[i].Draw();
                 }
-                if (!playerBullets[i].isVisible)
+                else
                 {
-                    playerBullets.Remove(playerBullets[i]);
+                    Console.SetCursorPosition(bullets[i].X, bullets[i].Y);
+                    Console.Write(' ');
+
                 }
             }
         }
@@ -196,7 +166,7 @@ namespace Tanks
             }
         }
 
-        static void PrintOnPosition(int x, int y, string str, ConsoleColor color = ConsoleColor.DarkBlue) // for strings
+        static void PrintOnPosition(int x, int y, string str, ConsoleColor color = ConsoleColor.DarkBlue)
         {
             Console.SetCursorPosition(x, y);
             Console.ForegroundColor = color;
@@ -206,6 +176,7 @@ namespace Tanks
         private static void DrawGameMenu()
         {
             PrintOnPosition(53, 5, "Score:", ConsoleColor.Magenta);
+            PrintOnPosition(53, 7, string.Format("Lives: {0}", Tank.LivesLeft), ConsoleColor.Magenta);
         }
 
         private static void DrawBricks(List<Brick> bricks)
@@ -293,6 +264,8 @@ namespace Tanks
             {
                 if (bricks[i].Ruined)
                 {
+                    Console.SetCursorPosition(bricks[i].X, bricks[i].Y);
+                    Console.Write(' ');
                     bricks.Remove(bricks[i]);
                 }
             }

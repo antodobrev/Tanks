@@ -11,6 +11,9 @@ namespace Tanks
         private int x;
         private int y;
 
+        private int prevX;
+        private int prevY;
+
         public int boundaryX = Tanks.WindowWidth - Tanks.GameMenuWidth;
         public int boundaryY = Tanks.WindowHeight;
 
@@ -19,16 +22,14 @@ namespace Tanks
 
         private bool striked;
 
-        int livesLeft;
+        static int livesLeft;
 
         public string Direction = "up";
 
         public Tank(int initX, int initY)
         {
-            this.livesLeft = 5;
+            livesLeft = 5;
             this.striked = false;
-            //this.boundaryX = BoundaryX;
-            //this.boundaryY = BoundaryY;
             this.x = initX / 2;
             this.y = initY - 1;
         }
@@ -64,6 +65,30 @@ namespace Tanks
             }
         }
 
+        public int PrevX
+        {
+            get
+            {
+                return this.prevX;
+            }
+            set
+            {
+                this.prevX = value;
+            }
+        }
+
+        public int PrevY
+        {
+            get
+            {
+                return this.prevY;
+            }
+            set
+            {
+                this.prevY = value;
+            }
+        }
+
         public bool Striked
         {
             get
@@ -72,7 +97,7 @@ namespace Tanks
             }
             set
             {
-                striked = value;
+                this.striked = value;
                 if (striked == true)
                 {
                     if (livesLeft > 0)
@@ -83,7 +108,7 @@ namespace Tanks
             }
         }
 
-        public int LivesLeft
+        public static int LivesLeft
         {
             get
             {
@@ -94,28 +119,36 @@ namespace Tanks
         {
             if (x + 1 < boundaryX)
             {
+                prevX = x;
+                prevY = y;
                 x++;
             }
         }
         public void MoveLeft()
         {
-            if (x-1 >= 0)
+            if (x - 1 >= 0)
             {
+                prevX = x;
+                prevY = y;
                 x--;
             }
         }
         public void MoveUp()
         {
-            if (y - 1 > 0)
+            if (y - 1 >= 0)
             {
-                x--;
+                prevX = x;
+                prevY = y;
+                y--;
             }
         }
         public void MoveDown()
         {
             if (y + 1 < boundaryY)
             {
-                x++;
+                prevX = x;
+                prevY = y;
+                y++;
             }
         }
         public void Draw()
@@ -125,12 +158,17 @@ namespace Tanks
                 Console.ForegroundColor = color;
                 Console.SetCursorPosition(x, y);
                 Console.Write(symbols);
+                Console.SetCursorPosition(prevX, prevY);
+                Console.Write(' ');
             }
-            else
+            else if (striked)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.SetCursorPosition(x, y);
                 Console.Write("X");
+                Console.SetCursorPosition(prevX, prevY);
+                Console.Write(' ');
+                livesLeft--;
                 X = boundaryX / 2;
                 Y = boundaryY - 1;
             }
