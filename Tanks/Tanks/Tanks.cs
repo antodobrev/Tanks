@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Text;
 using System.Threading;
 
@@ -32,10 +31,10 @@ namespace Tanks
                 int enemyPosition = random.Next(0, 3);
                 switch (enemyPosition)
                 {
-                    case 0: enemies[i] = new Enemy(0, 0); enemies[i].Direction=Enemy.PossibleDirections[random.Next(0, Enemy.PossibleDirections.Count)]; break;
+                    case 0: enemies[i] = new Enemy(0, 0); enemies[i].Direction = Enemy.PossibleDirections[random.Next(0, Enemy.PossibleDirections.Count)]; break;
                     case 1: enemies[i] = new Enemy(boundaryX / 2, 0); break;
                     case 2: enemies[i] = new Enemy(boundaryX - 1, 0); break;
-                    default:break;
+                    default: break;
                 }
             }
 
@@ -43,7 +42,7 @@ namespace Tanks
             //Intro.SecondIntro();
             List<Bullet> playerBullets = new List<Bullet>();
             List<Bullet> enemiesBullets = new List<Bullet>();
-            List<Bricks.Brick> bricks = BricksPositions();
+            List<Brick> bricks = BricksPositions();
             //int reloadingTime = 0;
             while (true)
             {
@@ -138,7 +137,7 @@ namespace Tanks
                         {
                             enemiesBullets.Add(bullet);
                         }
-                        
+
                     }
                 }
 
@@ -190,9 +189,9 @@ namespace Tanks
             PrintOnPosition(53, 5, "Score:", ConsoleColor.Magenta);
         }
 
-        private static void DrawBricks(List<Bricks.Brick> bricks)
+        private static void DrawBricks(List<Brick> bricks)
         {
-            foreach (Bricks.Brick brick in bricks)
+            foreach (Brick brick in bricks)
             {
                 if (brick.Ruined == false)
                 {
@@ -201,14 +200,14 @@ namespace Tanks
             }
         }
 
-        public static List<Bricks.Brick> BricksPositions()
+        public static List<Brick> BricksPositions()
         {
 
-            List<Bricks.Brick> bricksPositions = new List<Bricks.Brick>();
+            List<Brick> bricksPositions = new List<Brick>();
 
             for (int i = 7; i < 45; i++)
             {
-                Bricks.Brick brick = new Bricks.Brick
+                Brick brick = new Brick
                 {
                     X = i,
                     Y = 12
@@ -218,7 +217,7 @@ namespace Tanks
 
             for (int i = 8; i < 28; i++)
             {
-                Bricks.Brick brick = new Bricks.Brick
+                Brick brick = new Brick
                 {
                     X = 25,
                     Y = i
@@ -228,7 +227,7 @@ namespace Tanks
 
             for (int i = 1; i < 15; i++)
             {
-                Bricks.Brick brick = new Bricks.Brick
+                Brick brick = new Brick
                 {
                     X = i,
                     Y = 7
@@ -238,7 +237,7 @@ namespace Tanks
 
             for (int i = 2; i < 11; i++)
             {
-                Bricks.Brick brick = new Bricks.Brick
+                Brick brick = new Brick
                 {
                     X = 15,
                     Y = i
@@ -248,7 +247,7 @@ namespace Tanks
 
             for (int i = 6; i < 39; i++)
             {
-                Bricks.Brick brick = new Bricks.Brick
+                Brick brick = new Brick
                 {
                     X = i,
                     Y = 30
@@ -258,7 +257,7 @@ namespace Tanks
 
             for (int i = 27; i < 49; i++)
             {
-                Bricks.Brick brick = new Bricks.Brick
+                Brick brick = new Brick
                 {
                     X = i,
                     Y = 25
@@ -269,7 +268,7 @@ namespace Tanks
             return bricksPositions;
         }
 
-        public static List<Bricks.Brick> FindRuinedBrick(List<Bricks.Brick> bricks, int x, int y)
+        public static List<Brick> FindRuinedBrick(List<Brick> bricks, int x, int y)
         {
             foreach (var brick in bricks)
             {

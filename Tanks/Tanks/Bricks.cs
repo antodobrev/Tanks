@@ -4,77 +4,75 @@ using System.Diagnostics.Eventing.Reader;
 
 namespace Tanks
 {
-    class Bricks
+    class Brick
     {
-        public class Brick
+        private int x;
+        private int y;
+
+        private const string symbol = "@";
+
+        private const ConsoleColor color = ConsoleColor.DarkMagenta;
+
+        private bool ruined;
+
+        public Brick()
         {
-            private int x;
-            private int y;
+            this.x = X;
+            this.y = Y;
+            this.ruined = false;
+        }
 
-            private const string symbol = "@";
-
-            private const ConsoleColor color = ConsoleColor.DarkMagenta;
-
-            private bool ruined;
-
-            public Brick()
+        public ConsoleColor Color
+        {
+            get
             {
-                this.x = X;
-                this.y = Y;
-                this.ruined = false;
+                return color;
             }
+        }
 
-            public ConsoleColor Color
+        public string Symbol
+        {
+            get
             {
-                get
-                {
-                    return color;
-                }
+                return symbol;
             }
+        }
 
-            public string Symbol
+        public int X
+        {
+            get
             {
-                get
-                {
-                    return symbol;
-                }
+                return this.x;
             }
-
-            public int X
+            set
             {
-                get
-                {
-                    return this.x;
-                }
-                set
-                {
-                    this.x = value;
-                }
+                this.x = value;
             }
+        }
 
-            public int Y
+        public int Y
+        {
+            get
             {
-                get
-                {
-                    return this.y;
-                }
-                set
-                {
-                    this.y = value;
-                }
+                return this.y;
             }
-
-            public bool Ruined
+            set
             {
-                get
-                {
-                    return ruined;
-                }
-                set
-                {
-                    this.ruined = value;
-                }
+                this.y = value;
+            }
+        }
+
+        public bool Ruined
+        {
+            get
+            {
+                return ruined;
+            }
+            set
+            {
+                this.ruined = value;
             }
         }
     }
 }
+
