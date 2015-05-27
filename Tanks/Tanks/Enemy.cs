@@ -181,7 +181,7 @@ namespace Tanks
             }
         }
 
-        public bool CheckLeftCell(List<Brick> bricks)
+        public bool CheckLeftCell(List<Brick> bricks,Tank playerTank,List<Enemy> enemies)
         {
             bool isEmpty = true;
             foreach (var brick in bricks)
@@ -192,9 +192,23 @@ namespace Tanks
                     break;
                 }
             }
+
+            if (x - 1 == playerTank.X && y == playerTank.Y)
+            {
+                isEmpty = false;
+            }
+
+            foreach (var enemy in enemies)
+            {
+                if (x - 1 == enemy.X && y == enemy.Y)
+                {
+                    isEmpty = false;
+                    break;
+                }
+            }
             return isEmpty;
         }
-        public bool CheckRightCell(List<Brick> bricks)
+        public bool CheckRightCell(List<Brick> bricks,Tank playerTank, List<Enemy> enemies)
         {
             bool isEmpty = true;
             foreach (var brick in bricks)
@@ -205,9 +219,23 @@ namespace Tanks
                     break;
                 }
             }
+
+            if (x + 1 == playerTank.X && y == playerTank.Y)
+            {
+                isEmpty = false;
+            }
+
+            foreach (var enemy in enemies)
+            {
+                if (x + 1 == enemy.X && y == enemy.Y)
+                {
+                    isEmpty = false;
+                    break;
+                }
+            }
             return isEmpty;
         }
-        public bool CheckDownCell(List<Brick> bricks)
+        public bool CheckDownCell(List<Brick> bricks,Tank playerTank, List<Enemy> enemies)
         {
             bool isEmpty = true;
             foreach (var brick in bricks)
@@ -218,14 +246,40 @@ namespace Tanks
                     break;
                 }
             }
+
+            if (x == playerTank.X && y + 1 == playerTank.Y)
+            {
+                isEmpty = false;
+            }
+
+            foreach (var enemy in enemies)
+            {
+                if (x == enemy.X && y + 1 == enemy.Y)
+                {
+                    isEmpty = false;
+                    break;
+                }
+            }
             return isEmpty;
         }
-        public bool CheckUpCell(List<Brick> bricks)
+        public bool CheckUpCell(List<Brick> bricks,Tank playerTank,List<Enemy> enemies)
         {
             bool isEmpty = true;
             foreach (var brick in bricks)
             {
                 if (x == brick.X && y - 1 == brick.Y)
+                {
+                    isEmpty = false;
+                    break;
+                }
+            }
+            if (x == playerTank.X && y - 1 == playerTank.Y)
+            {
+                isEmpty = false;
+            }
+            foreach (var enemy in enemies)
+            {
+                if (x == enemy.X && y - 1 == enemy.Y)
                 {
                     isEmpty = false;
                     break;

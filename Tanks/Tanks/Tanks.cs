@@ -112,16 +112,16 @@ namespace Tanks
                         switch (enemies[i].Direction)
                         {
                             case "left":
-                                if (enemies[i].CheckLeftCell(bricks))
+                                if (enemies[i].CheckLeftCell(bricks,playerTank,enemies))
                                     enemies[i].MoveLeft(); break;
                             case "right":
-                                if (enemies[i].CheckRightCell(bricks))
+                                if (enemies[i].CheckRightCell(bricks,playerTank,enemies))
                                     enemies[i].MoveRight(); break;
                             case "up":
-                                if (enemies[i].CheckUpCell(bricks))
+                                if (enemies[i].CheckUpCell(bricks,playerTank,enemies))
                                     enemies[i].MoveUp(); break;
                             case "down":
-                                if (enemies[i].CheckDownCell(bricks))
+                                if (enemies[i].CheckDownCell(bricks,playerTank,enemies))
                                     enemies[i].MoveDown(); break;
                             default: break;
                         }
