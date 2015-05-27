@@ -144,6 +144,7 @@ namespace Tanks
                     }
                     DetectCollitionWithBullet(enemiesBullets, bricks);
                     DetectCollitionWithBullet(playerBullets, bricks);
+                    BulletsMAtch(playerBullets,enemiesBullets);
 
                     MoveBulletInField(playerBullets);
                     MoveBulletInField(enemiesBullets);
@@ -394,6 +395,21 @@ namespace Tanks
                     Console.ForegroundColor = ConsoleColor.DarkGray;
                     Console.SetCursorPosition(bricks[i].X, bricks[i].Y);
                     Console.Write(bricks[i].Symbol);
+                }
+            }
+        }
+
+        public static void BulletsMAtch(List<Bullet> playerBullets, List<Bullet> enemiesBullets)
+        {
+            foreach (var playerBullet in playerBullets)
+            {
+                foreach (var enemyBullet in enemiesBullets)
+                {
+                    if (playerBullet.X == enemyBullet.X && playerBullet.Y == enemyBullet.Y)
+                    {
+                        playerBullet.isVisible = false;
+                        enemyBullet.isVisible = false;
+                    }
                 }
             }
         }
