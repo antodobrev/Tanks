@@ -65,6 +65,7 @@ namespace Tanks
             Thread.Sleep(1000);
             Console.Clear();
         }
+
         public static void SecondIntro()
         {
             Console.OutputEncoding = Encoding.Unicode;

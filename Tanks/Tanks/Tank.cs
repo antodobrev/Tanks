@@ -18,7 +18,6 @@ namespace Tanks
         private const ConsoleColor color = ConsoleColor.Yellow;
 
         private bool striked;
-
         static int livesLeft;
 
         public string Direction = "up";
@@ -30,6 +29,7 @@ namespace Tanks
             this.x = initX / 2;
             this.y = initY - 1;
         }
+
         public ConsoleColor Color
         {
             get
@@ -49,7 +49,6 @@ namespace Tanks
                 this.x = value;
             }
         }
-
         public int Y
         {
             get
@@ -73,7 +72,6 @@ namespace Tanks
                 this.prevX = value;
             }
         }
-
         public int PrevY
         {
             get
@@ -104,7 +102,6 @@ namespace Tanks
                 }
             }
         }
-
         public static int LivesLeft
         {
             get
@@ -116,6 +113,7 @@ namespace Tanks
                 livesLeft = value;
             }
         }
+
         public void MoveRight()
         {
             if (x + 1 < boundaryX)
@@ -152,6 +150,7 @@ namespace Tanks
                 y++;
             }
         }
+
         public void Draw()
         {
             if (!striked)
@@ -177,6 +176,7 @@ namespace Tanks
                 this.y = boundaryY - 1;
             }
         }
+
         public void CheckIfHit(List<Bullet> bullets)
         {
             foreach (var bullet in bullets)

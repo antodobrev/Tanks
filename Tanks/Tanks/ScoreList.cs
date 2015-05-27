@@ -12,7 +12,7 @@ namespace Tanks
         //Tanks class calls this method first.
         public static void Score(int score)
         {
-            StreamReader reader = new StreamReader(@"..\..\score.txt");
+            StreamReader reader = new StreamReader(@"..\..\res\score.txt");
             Dictionary<string, int> scoreList = new Dictionary<string, int>();
             Thread.Sleep(2000);
             Console.Clear();
@@ -60,7 +60,7 @@ namespace Tanks
         //write the score in the .txt file to have it for a long time :)
         public static void WriteScore(Dictionary<string, int> sortedScoreList)
         {
-            StreamWriter writeScore = new StreamWriter(@"..\..\score.txt");
+            StreamWriter writeScore = new StreamWriter(@"..\..\res\score.txt");
             using (writeScore)
             {
                 foreach (var pair in sortedScoreList)

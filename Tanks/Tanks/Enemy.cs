@@ -20,7 +20,7 @@ namespace Tanks
         public static List<ConsoleColor> PossibleColors = new List<ConsoleColor>
         {
           ConsoleColor.Blue,
-          ConsoleColor.DarkBlue,
+          ConsoleColor.Cyan,
           ConsoleColor.DarkCyan,
           ConsoleColor.DarkGreen,
           ConsoleColor.Green
@@ -57,7 +57,6 @@ namespace Tanks
                 this.x = value;
             }
         }
-
         public int Y
         {
             get
@@ -69,6 +68,7 @@ namespace Tanks
                 this.y = value;
             }
         }
+
         public int PrevX
         {
             get
@@ -80,7 +80,6 @@ namespace Tanks
                 this.prevX = value;
             }
         }
-
         public int PrevY
         {
             get
@@ -92,6 +91,7 @@ namespace Tanks
                 this.prevY = value;
             }
         }
+
         public bool Striked
         {
             get
@@ -103,6 +103,7 @@ namespace Tanks
                 this.striked = value;
             }
         }
+
         public Enemy(int initX, int initY)
         {
             this.striked = false;
@@ -146,6 +147,7 @@ namespace Tanks
                 y++;
             }
         }
+
         public void CheckIfHit(List<Bullet> bullets)
         {
             foreach (var bullet in bullets)
@@ -158,6 +160,7 @@ namespace Tanks
                 }
             }
         }
+
         public void Draw()
         {
             if (!striked)
@@ -175,6 +178,7 @@ namespace Tanks
                 Console.Write("X");
             }
         }
+
         public bool CheckLeftCell(List<Brick> bricks)
         {
             bool isEmpty = true;

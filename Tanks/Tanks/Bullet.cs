@@ -12,7 +12,6 @@ namespace Tanks
         private int prevX;
         private int prevY;
         public bool isVisible = true;
-
         private int boundaryX;
         private int boundaryY;
         public int X
@@ -50,13 +49,11 @@ namespace Tanks
         public Bullet()
         {
         }
-
         public Bullet(int x, int y)
         {
             this.X = x;
             this.Y = y;
         }
-
         public ConsoleColor Color
         {
             get
@@ -64,7 +61,6 @@ namespace Tanks
                 return color;
             }
         }
-
         public void Shoot(Tank tank)
         {
             this.x = tank.X;
@@ -125,7 +121,6 @@ namespace Tanks
                 Console.SetCursorPosition(x, y);
                 Console.Write(body);
             }
-
         }
         public void MoveBullet()
         {
@@ -175,18 +170,17 @@ namespace Tanks
             {
                 isVisible = false;
             }
-            else if (((y == boundaryY -1) && Direction != "left"&& Direction != "right") || (y == 0 && Direction != "left" && Direction != "right"))
+            else if (((y == boundaryY - 1) && Direction != "left" && Direction != "right") || (y == 0 && Direction != "left" && Direction != "right"))
             {
                 isVisible = false;
             }
         }
-
         public void Draw()
         {
             Console.ForegroundColor = color;
-            Console.SetCursorPosition(x, y);
+            Console.SetCursorPosition(this.x, this.y);
             Console.Write(body);
-            Console.SetCursorPosition(prevX, prevY);
+            Console.SetCursorPosition(this.prevX, this.prevY);
             Console.Write(' ');
         }
     }

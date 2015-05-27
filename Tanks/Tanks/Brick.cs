@@ -8,16 +8,14 @@ namespace Tanks
         private int y;
 
         private const string symbol = "@";
-
         private const ConsoleColor color = ConsoleColor.DarkMagenta;
 
-        private bool ruined;
+        private bool ruined = false;
 
         public Brick()
         {
             this.x = X;
             this.y = Y;
-            this.ruined = false;
         }
 
         public ConsoleColor Color
@@ -70,6 +68,21 @@ namespace Tanks
             {
                 this.ruined = value;
             }
+        }
+
+        public void DrawBricks()
+        {
+                if (this.ruined == false)
+                {
+                    PrintOnPosition(this.x, this.y, symbol, color);
+                }
+        }
+
+        static void PrintOnPosition(int x, int y, string str, ConsoleColor color = ConsoleColor.DarkBlue)
+        {
+            Console.SetCursorPosition(x, y);
+            Console.ForegroundColor = color;
+            Console.Write(str);
         }
     }
 }
