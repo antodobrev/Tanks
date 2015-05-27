@@ -25,184 +25,181 @@ namespace Tanks
             int boundaryY = WindowHeight;
 
             Random random = new Random();
-            Tank playerTank = new Tank(boundaryX, boundaryY);
-            List<Enemy> enemies = new List<Enemy>();
-            for (int i = 0; i < MaximumEnemies; i++)
-            {
-                int enemyPosition = random.Next(0, 3);
-                switch (enemyPosition)
-                {
-                    case 0: enemies.Add(new Enemy(0, 0)); break;
-                    case 1: enemies.Add(new Enemy(boundaryX / 2, 0)); break;
-                    case 2: enemies.Add(new Enemy(boundaryX - 1, 0)); break;
-                    default: break;
-                }
-            }
             //Intro.FirstIntro();
             //Intro.SecondIntro();
-            List<Bullet> playerBullets = new List<Bullet>();
-            List<Bullet> enemiesBullets = new List<Bullet>();
-            List<Brick> bricks = BricksPositions();
-            DrawBorder(boundaryX, boundaryY);
-            DrawBricks(bricks);
             //int reloadingTime = 0;
             while (true)
             {
-                DrawGameMenu();
-                //Test for ruined brick
-                //takes x and y, where the bullet hits the brick, and makes brick.Ruined true.
-                //bricks = FindRuinedBrick(bricks, 10, 12);
-
-                while (Console.KeyAvailable)
+                Tank playerTank = new Tank(boundaryX, boundaryY);
+                List<Enemy> enemies = new List<Enemy>();
+                for (int i = 0; i < MaximumEnemies; i++)
                 {
-                    ConsoleKeyInfo pressedKey = Console.ReadKey(true);
-                    while (Console.KeyAvailable) Console.ReadKey(true);
-                    if (pressedKey.Key == ConsoleKey.LeftArrow)
+                    int enemyPosition = random.Next(0, 3);
+                    switch (enemyPosition)
                     {
-                        playerTank.Direction = "left";
-                        if (playerTank.CheckLeftCell(bricks))
-                            playerTank.MoveLeft();
-                    }
-                    else if (pressedKey.Key == ConsoleKey.RightArrow)
-                    {
-                        playerTank.Direction = "right";
-                        if (playerTank.CheckRightCell(bricks))
-                            playerTank.MoveRight();
-                    }
-                    else if (pressedKey.Key == ConsoleKey.UpArrow)
-                    {
-                        playerTank.Direction = "up";
-                        if (playerTank.CheckUpCell(bricks))
-                            playerTank.MoveUp();
-                    }
-                    else if (pressedKey.Key == ConsoleKey.DownArrow)
-                    {
-                        playerTank.Direction = "down";
-                        if (playerTank.CheckDownCell(bricks))
-                            playerTank.MoveDown();
-                    }
-                    else if (pressedKey.Key == ConsoleKey.Spacebar)
-                    {
-                        Bullet bullet = new Bullet();
-                        bullet.Shoot(playerTank);
-                        playerBullets.Add(bullet);
-                    }
-                }
-                for (int i = 0; i < enemies.Count; i++)
-                {
-                    if (random.Next(0, 2) != 0)
-                    {
-                        enemies[i].Direction = Enemy.PossibleDirections[random.Next(0, Enemy.PossibleDirections.Count)];
-                    }
-                    switch (enemies[i].Direction)
-                    {
-                        case "left": 
-                            if (enemies[i].CheckLeftCell(bricks))
-                                enemies[i].MoveLeft(); break;
-                        case "right":
-                            if (enemies[i].CheckRightCell(bricks))
-                                enemies[i].MoveRight(); break;
-                        case "up":
-                            if (enemies[i].CheckUpCell(bricks))
-                                enemies[i].MoveUp(); break;
-                        case "down":
-                            if (enemies[i].CheckDownCell(bricks))
-                                enemies[i].MoveDown(); break;
+                        case 0: enemies.Add(new Enemy(0, 0)); break;
+                        case 1: enemies.Add(new Enemy(boundaryX / 2, 0)); break;
+                        case 2: enemies.Add(new Enemy(boundaryX - 1, 0)); break;
                         default: break;
                     }
+                }
+                List<Bullet> playerBullets = new List<Bullet>();
+                List<Bullet> enemiesBullets = new List<Bullet>();
+                List<Brick> bricks = BricksPositions();
+                DrawBorder(boundaryX, boundaryY);
+                foreach (Brick brick in bricks)
+                {
+                    brick.DrawBricks();
+                }
 
-                    if (random.Next(0, 20) == 0 && enemiesBullets.Count < 10)
+                while (true)
+                {
+                    DrawGameMenu();
+                    //Test for ruined brick
+                    //takes x and y, where the bullet hits the brick, and makes brick.Ruined true.
+                    //bricks = FindRuinedBrick(bricks, 10, 12);
+
+                    while (Console.KeyAvailable)
                     {
-                        Bullet bullet = new Bullet();
-                        bullet.Shoot(enemies[i]);
-                        if (bullet.Direction != "")
+                        ConsoleKeyInfo pressedKey = Console.ReadKey(true);
+                        while (Console.KeyAvailable) Console.ReadKey(true);
+                        if (pressedKey.Key == ConsoleKey.LeftArrow)
                         {
-                            enemiesBullets.Add(bullet);
+                            playerTank.Direction = "left";
+                            if (playerTank.CheckLeftCell(bricks))
+                                playerTank.MoveLeft();
+                        }
+                        else if (pressedKey.Key == ConsoleKey.RightArrow)
+                        {
+                            playerTank.Direction = "right";
+                            if (playerTank.CheckRightCell(bricks))
+                                playerTank.MoveRight();
+                        }
+                        else if (pressedKey.Key == ConsoleKey.UpArrow)
+                        {
+                            playerTank.Direction = "up";
+                            if (playerTank.CheckUpCell(bricks))
+                                playerTank.MoveUp();
+                        }
+                        else if (pressedKey.Key == ConsoleKey.DownArrow)
+                        {
+                            playerTank.Direction = "down";
+                            if (playerTank.CheckDownCell(bricks))
+                                playerTank.MoveDown();
+                        }
+                        else if (pressedKey.Key == ConsoleKey.Spacebar)
+                        {
+                            Bullet bullet = new Bullet();
+                            bullet.Shoot(playerTank);
+                            playerBullets.Add(bullet);
                         }
                     }
-                }
-
-                playerTank.Draw();
-                for (int i = 0; i < enemies.Count; i++)
-                {
-                    enemies[i].Draw();
-                }
-                DetectCollitionWithBullet(enemiesBullets, bricks);
-                DetectCollitionWithBullet(playerBullets, bricks);
-                MoveBulletInField(playerBullets);
-                MoveBulletInField(enemiesBullets);
-                playerTank.CheckIfHit(enemiesBullets);
-                for (int i = 0; i < enemies.Count; i++)
-                {
-                    enemies[i].CheckIfHit(playerBullets);
-                    if (enemies[i].Striked)
+                    for (int i = 0; i < enemies.Count; i++)
                     {
-                        switch (enemies[i].Color)
+                        if (random.Next(0, 2) != 0)
                         {
-                            case ConsoleColor.Blue: score += 200; break;
-                            case ConsoleColor.DarkBlue: score += 250; break;
-                            case ConsoleColor.DarkCyan: score += 300; break;
-                            case ConsoleColor.DarkGreen: score += 350; break;
-                            case ConsoleColor.Green: score += 400; break;
+                            enemies[i].Direction = Enemy.PossibleDirections[random.Next(0, Enemy.PossibleDirections.Count)];
+                        }
+                        switch (enemies[i].Direction)
+                        {
+                            case "left":
+                                if (enemies[i].CheckLeftCell(bricks))
+                                    enemies[i].MoveLeft(); break;
+                            case "right":
+                                if (enemies[i].CheckRightCell(bricks))
+                                    enemies[i].MoveRight(); break;
+                            case "up":
+                                if (enemies[i].CheckUpCell(bricks))
+                                    enemies[i].MoveUp(); break;
+                            case "down":
+                                if (enemies[i].CheckDownCell(bricks))
+                                    enemies[i].MoveDown(); break;
                             default: break;
                         }
-                        enemies.Remove(enemies[i]);
-                    }
-                }
 
-                RemoveRuinedBrick(bricks);
-                if (Tank.LivesLeft < 0)
-                {
-                    Console.Clear();
-                    Console.Beep(625, 225);
-                    PrintOnPosition(31, boundaryY / 2, "GAME OVER", ConsoleColor.Red);
-                    ScoreList.Score(score);
-                    Console.ReadLine();
-                    Environment.Exit(0);
-                }
-                if (enemies.Count == 0)
-                {
+                        if (random.Next(0, 20) == 0 && enemiesBullets.Count < 10)
+                        {
+                            Bullet bullet = new Bullet();
+                            bullet.Shoot(enemies[i]);
+                            if (bullet.Direction != "")
+                            {
+                                enemiesBullets.Add(bullet);
+                            }
+                        }
+                    }
+
+                    playerTank.Draw();
+                    for (int i = 0; i < enemies.Count; i++)
+                    {
+                        enemies[i].Draw();
+                    }
+                    DetectCollitionWithBullet(enemiesBullets, bricks);
+                    DetectCollitionWithBullet(playerBullets, bricks);
+
+                    MoveBulletInField(playerBullets);
+                    MoveBulletInField(enemiesBullets);
+
+                    playerTank.CheckIfHit(enemiesBullets);
+                    for (int i = 0; i < enemies.Count; i++)
+                    {
+                        enemies[i].CheckIfHit(playerBullets);
+                        if (enemies[i].Striked)
+                        {
+                            switch (enemies[i].Color)
+                            {
+                                case ConsoleColor.Blue: score += 200; break;
+                                case ConsoleColor.Cyan: score += 250; break;
+                                case ConsoleColor.DarkCyan: score += 300; break;
+                                case ConsoleColor.DarkGreen: score += 350; break;
+                                case ConsoleColor.Green: score += 400; break;
+                                default: break;
+                            }
+                            enemies.Remove(enemies[i]);
+                        }
+                    }
+
+                    RemoveRuinedBrick(bricks);
+                    if (enemies.Count == 0)
+                    {
                         Console.Clear();
-                         Console.Beep(625, 225);
+                        Console.Beep(625, 225);
                         PrintOnPosition(32, boundaryY / 2, "YOU WIN", ConsoleColor.Red);
                         ScoreList.Score(score);
+                        if (Console.ReadKey().Key == ConsoleKey.Y)
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            Environment.Exit(0);
+                        }
+                    }
+                    if (Tank.LivesLeft < 0)
+                    {
+                        Console.Clear();
+                        Console.Beep(625, 225);
+                        PrintOnPosition(31, boundaryY / 2, "GAME OVER", ConsoleColor.Red);
+                        ScoreList.Score(score);
                         Console.ReadLine();
-                        Environment.Exit(0);
+                        break;
+                    }
+                    Thread.Sleep(100);
                 }
-                Thread.Sleep(100);
-                //Console.Clear();
+                Console.Clear();
             }
         }
 
-        public static void DetectCollitionWithBullet(List<Bullet> enemiesBullets, List<Brick> bricks)
+        public static void DetectCollitionWithBullet(List<Bullet> bullets, List<Brick> bricks)
         {
             foreach (var brick in bricks)
             {
-                foreach (var bullet in enemiesBullets)
+                foreach (var bullet in bullets)
                 {
                     if (brick.X == bullet.X && brick.Y == bullet.Y)
                     {
                         brick.Ruined = true;
                         bullet.isVisible = false;
                     }
-                }
-            }
-        }
-
-        private static void MoveBulletInField(List<Bullet> bullets)
-        {
-            for (int i = 0; i < bullets.Count; i++)
-            {
-                if (bullets[i].isVisible)
-                {
-                    bullets[i].MoveBullet();
-                    bullets[i].Draw();
-                }
-                else
-                {
-                    Console.SetCursorPosition(bullets[i].X, bullets[i].Y);
-                    Console.Write(' ');
-                    bullets.Remove(bullets[i]);
                 }
             }
         }
@@ -226,17 +223,6 @@ namespace Tanks
         {
             PrintOnPosition(53, 5, string.Format("Score: {0}", score), ConsoleColor.Magenta);
             PrintOnPosition(53, 7, string.Format("Lives: {0}", Tank.LivesLeft), ConsoleColor.Magenta);
-        }
-
-        private static void DrawBricks(List<Brick> bricks)
-        {
-            foreach (Brick brick in bricks)
-            {
-                if (brick.Ruined == false)
-                {
-                    PrintOnPosition(brick.X, brick.Y, brick.Symbol, brick.Color);
-                }
-            }
         }
 
         public static List<Brick> BricksPositions()
@@ -305,6 +291,24 @@ namespace Tanks
             }
 
             return bricksPositions;
+        }
+
+        private static void MoveBulletInField(List<Bullet> bullets)
+        {
+            for (int i = 0; i < bullets.Count; i++)
+            {
+                if (bullets[i].isVisible)
+                {
+                    bullets[i].MoveBullet();
+                    bullets[i].Draw();
+                }
+                else
+                {
+                    Console.SetCursorPosition(bullets[i].X, bullets[i].Y);
+                    Console.Write(' ');
+                    bullets.Remove(bullets[i]);
+                }
+            }
         }
 
         public static List<Brick> RemoveRuinedBrick(List<Brick> bricks)
