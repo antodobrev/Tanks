@@ -175,7 +175,7 @@ namespace Tanks
                         //Console.Beep(625, 225);
                         PrintOnPosition(28, boundaryY / 2, "LEVEL COMPLETED", ConsoleColor.Red);
                         level++;
-                        MaximumEnemies += 5;
+                        MaximumEnemies += 6;
                         playerTank.X = boundaryX / 2;
                         playerTank.Y = boundaryY - 1;
                         Thread.Sleep(700);
@@ -264,18 +264,6 @@ namespace Tanks
                 bricksPositions.Add(brick);
             }
 
-            for (int i = 7; i < 45; i++)
-            {
-                Brick brick = new Brick
-                {
-                    X = i,
-                    Y = 13
-                };
-                brick.Color = ConsoleColor.DarkGray;
-                brick.Solid = true;
-                bricksPositions.Add(brick);
-            }
-
             for (int i = 8; i < 28; i++)
             {
                 Brick brick = new Brick
@@ -323,6 +311,42 @@ namespace Tanks
                     X = i,
                     Y = 25
                 };
+                bricksPositions.Add(brick);
+            }
+
+            for (int i = 1; i < 17; i++)
+            {
+                Brick brick = new Brick
+                {
+                    X = 4,
+                    Y = i
+                };
+                brick.Color = ConsoleColor.DarkGray;
+                brick.Solid = true;
+                bricksPositions.Add(brick);
+            }
+
+            for (int i = 18; i < 34; i++)
+            {
+                Brick brick = new Brick
+                {
+                    X = 46,
+                    Y = i
+                };
+                brick.Color = ConsoleColor.DarkGray;
+                brick.Solid = true;
+                bricksPositions.Add(brick);
+            }
+
+            for (int i = 7; i < 45; i++)
+            {
+                Brick brick = new Brick
+                {
+                    X = i,
+                    Y = 13
+                };
+                brick.Color = ConsoleColor.DarkGray;
+                brick.Solid = true;
                 bricksPositions.Add(brick);
             }
 
