@@ -75,25 +75,25 @@ namespace Tanks
                         if (pressedKey.Key == ConsoleKey.LeftArrow)
                         {
                             playerTank.Direction = "left";
-                            if (playerTank.CheckLeftCell(bricks))
+                            if (playerTank.CheckLeftCell(bricks,enemies))
                                 playerTank.MoveLeft();
                         }
                         else if (pressedKey.Key == ConsoleKey.RightArrow)
                         {
                             playerTank.Direction = "right";
-                            if (playerTank.CheckRightCell(bricks))
+                            if (playerTank.CheckRightCell(bricks,enemies))
                                 playerTank.MoveRight();
                         }
                         else if (pressedKey.Key == ConsoleKey.UpArrow)
                         {
                             playerTank.Direction = "up";
-                            if (playerTank.CheckUpCell(bricks))
+                            if (playerTank.CheckUpCell(bricks,enemies))
                                 playerTank.MoveUp();
                         }
                         else if (pressedKey.Key == ConsoleKey.DownArrow)
                         {
                             playerTank.Direction = "down";
-                            if (playerTank.CheckDownCell(bricks))
+                            if (playerTank.CheckDownCell(bricks,enemies))
                                 playerTank.MoveDown();
                         }
                         else if (pressedKey.Key == ConsoleKey.Spacebar)

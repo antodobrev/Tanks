@@ -191,7 +191,7 @@ namespace Tanks
             }
         }
 
-        public bool CheckLeftCell(List<Brick> bricks)
+        public bool CheckLeftCell(List<Brick> bricks,List<Enemy> enemies)
         {
             bool isEmpty = true;
             foreach (var brick in bricks)
@@ -202,9 +202,18 @@ namespace Tanks
                     break;
                 }
             }
+
+            foreach (var enemy in enemies)
+            {
+                if (x - 1 == enemy.X && y == enemy.Y)
+                {
+                    isEmpty = false;
+                    break;
+                }
+            }
             return isEmpty;
         }
-        public bool CheckRightCell(List<Brick> bricks)
+        public bool CheckRightCell(List<Brick> bricks,List<Enemy> enemies)
         {
             bool isEmpty = true;
             foreach (var brick in bricks)
@@ -215,9 +224,18 @@ namespace Tanks
                     break;
                 }
             }
+
+            foreach (var enemy in enemies)
+            {
+                if (x + 1 == enemy.X && y == enemy.Y)
+                {
+                    isEmpty = false;
+                    break;
+                }
+            }
             return isEmpty;
         }
-        public bool CheckDownCell(List<Brick> bricks)
+        public bool CheckDownCell(List<Brick> bricks,List<Enemy> enemies)
         {
             bool isEmpty = true;
             foreach (var brick in bricks)
@@ -228,9 +246,19 @@ namespace Tanks
                     break;
                 }
             }
+
+            foreach (var enemy in enemies)
+            {
+                if (x == enemy.X && y + 1 == enemy.Y)
+                {
+                    isEmpty = false;
+                    break;
+                }
+            }
+
             return isEmpty;
         }
-        public bool CheckUpCell(List<Brick> bricks)
+        public bool CheckUpCell(List<Brick> bricks,List<Enemy> enemies)
         {
             bool isEmpty = true;
             foreach (var brick in bricks)
@@ -241,6 +269,16 @@ namespace Tanks
                     break;
                 }
             }
+
+            foreach (var enemy in enemies)
+            {
+                if (x == enemy.X && y - 1 == enemy.Y)
+                {
+                    isEmpty = false;
+                    break;
+                }
+            }
+
             return isEmpty;
         }
     }
