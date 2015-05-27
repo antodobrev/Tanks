@@ -8,14 +8,18 @@ namespace Tanks
         private int y;
 
         private const string symbol = "@";
-        private const ConsoleColor color = ConsoleColor.DarkMagenta;
+        private ConsoleColor color = ConsoleColor.DarkMagenta;
 
         private bool ruined = false;
+
+        private bool solid = false;
 
         public Brick()
         {
             this.x = X;
             this.y = Y;
+            this.color = Color;
+            this.Solid = solid;
         }
 
         public ConsoleColor Color
@@ -24,6 +28,16 @@ namespace Tanks
             {
                 return color;
             }
+            set
+            {
+                color = value;
+            }
+        }
+
+        public bool Solid
+        {
+            get { return solid; }
+            set { solid = value; }
         }
 
         public string Symbol

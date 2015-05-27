@@ -159,6 +159,7 @@ namespace Tanks
                     }
 
                     RemoveRuinedBrick(bricks);
+                    PrintSolidBricks(bricks);
                     if (enemies.Count == 0)
                     {
                         Console.Clear();
@@ -200,6 +201,10 @@ namespace Tanks
                         brick.Ruined = true;
                         bullet.isVisible = false;
                     }
+                    else if (brick.X == bullet.X && brick.Y == bullet.Y)
+                    {
+                        bullet.isVisible = false;
+                    }
                 }
             }
         }
@@ -237,6 +242,18 @@ namespace Tanks
                     X = i,
                     Y = 12
                 };
+                bricksPositions.Add(brick);
+            }
+
+            for (int i = 7; i < 45; i++)
+            {
+                Brick brick = new Brick
+                {
+                    X = i,
+                    Y = 13
+                };
+                brick.Color = ConsoleColor.DarkGray;
+                brick.Solid = true;
                 bricksPositions.Add(brick);
             }
 
@@ -315,7 +332,7 @@ namespace Tanks
         {
             for (int i = 0; i < bricks.Count; i++)
             {
-                if (bricks[i].Ruined)
+                if (bricks[i].Ruined && bricks[i].Solid == false)
                 {
                     Console.SetCursorPosition(bricks[i].X, bricks[i].Y);
                     Console.Write(' ');
@@ -323,6 +340,19 @@ namespace Tanks
                 }
             }
             return bricks;
+        }
+
+        public static void PrintSolidBricks(List<Brick> bricks)
+        {
+            for (int i = 0; i < bricks.Count; i++)
+            {
+                if (bricks[i].Ruined && bricks[i].Solid)
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkGray;
+                    Console.SetCursorPosition(bricks[i].X, bricks[i].Y);
+                    Console.Write(bricks[i].Symbol);
+                }
+            }
         }
     }
 }
