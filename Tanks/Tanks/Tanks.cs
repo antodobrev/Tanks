@@ -11,7 +11,6 @@ namespace Tanks
         public const int GameMenuWidth = 20;
         public const int WindowHeight = 35;
         public const int WindowWidth = 71;
-        public const int MaximumEnemies = 10;
         public static int score = 0;
 
         static void Main()
@@ -24,14 +23,23 @@ namespace Tanks
             int boundaryX = WindowWidth - GameMenuWidth;
             int boundaryY = WindowHeight;
 
-            Random random = new Random();
             //Intro.FirstIntro();
             //Intro.SecondIntro();
+
+            Random random = new Random();
+            int level = 1;
+            int MaximumEnemies = 10;
+            Tank playerTank = new Tank(boundaryX, boundaryY);
+            List<Enemy> enemies = new List<Enemy>();
+            DrawBorder(boundaryX, boundaryY);
             //int reloadingTime = 0;
             while (true)
             {
-                Tank playerTank = new Tank(boundaryX, boundaryY);
-                List<Enemy> enemies = new List<Enemy>();
+                Console.Clear();
+                PrintOnPosition(32, boundaryY / 2, string.Format("LEVEL {0}", level), ConsoleColor.Red);
+                Thread.Sleep(700);
+                Console.Clear();
+
                 for (int i = 0; i < MaximumEnemies; i++)
                 {
                     int enemyPosition = random.Next(0, 3);
@@ -45,13 +53,13 @@ namespace Tanks
                 }
                 List<Bullet> playerBullets = new List<Bullet>();
                 List<Bullet> enemiesBullets = new List<Bullet>();
+
                 List<Brick> bricks = BricksPositions();
-                DrawBorder(boundaryX, boundaryY);
                 foreach (Brick brick in bricks)
                 {
                     brick.DrawBricks();
                 }
-
+                Thread.Sleep(500);
                 while (true)
                 {
                     DrawGameMenu();
@@ -163,17 +171,15 @@ namespace Tanks
                     if (enemies.Count == 0)
                     {
                         Console.Clear();
-                        Console.Beep(625, 225);
-                        PrintOnPosition(32, boundaryY / 2, "YOU WIN", ConsoleColor.Red);
-                        ScoreList.Score(score);
-                        if (Console.ReadKey().Key == ConsoleKey.Y)
-                        {
-                            break;
-                        }
-                        else
-                        {
-                            Environment.Exit(0);
-                        }
+                        //Console.Beep(625, 225);
+                        PrintOnPosition(28, boundaryY / 2, "LEVEL COMPLETED", ConsoleColor.Red);
+                        level++;
+                        MaximumEnemies += 5;
+                        playerTank.X = boundaryX / 2;
+                        playerTank.Y = boundaryY - 1;
+                        Thread.Sleep(700);
+                        break;
+
                     }
                     if (Tank.LivesLeft < 0)
                     {
@@ -181,6 +187,17 @@ namespace Tanks
                         Console.Beep(625, 225);
                         PrintOnPosition(31, boundaryY / 2, "GAME OVER", ConsoleColor.Red);
                         ScoreList.Score(score);
+                        if (Console.ReadKey().Key == ConsoleKey.Y)
+                        {
+                            score = 0;
+                            Tank.LivesLeft = 5;
+                            MaximumEnemies = 10;
+                            break;
+                        }
+                        else
+                        {
+                            Environment.Exit(0);
+                        }
                         Console.ReadLine();
                         break;
                     }
