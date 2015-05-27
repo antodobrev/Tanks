@@ -156,6 +156,8 @@ namespace Tanks
                 {
                     this.striked = true;
                     bullets.Remove(bullet);
+                    Console.SetCursorPosition(bullet.X,bullet.Y);
+                    Console.WriteLine(" ");
                     break;
                 }
             }

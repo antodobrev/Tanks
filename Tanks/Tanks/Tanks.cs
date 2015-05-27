@@ -12,6 +12,7 @@ namespace Tanks
         public const int WindowHeight = 35;
         public const int WindowWidth = 71;
         public static int score = 0;
+        public static int level = 1;
 
         static void Main()
         {
@@ -27,7 +28,6 @@ namespace Tanks
             //Intro.SecondIntro();
 
             Random random = new Random();
-            int level = 1;
             int MaximumEnemies = 10;
             Tank playerTank = new Tank(boundaryX, boundaryY);
             List<Enemy> enemies = new List<Enemy>();
@@ -60,6 +60,7 @@ namespace Tanks
                     brick.DrawBricks();
                 }
                 Thread.Sleep(500);
+                DrawBorder(boundaryX, boundaryY);
                 while (true)
                 {
                     DrawGameMenu();
@@ -243,6 +244,7 @@ namespace Tanks
 
         private static void DrawGameMenu()
         {
+            PrintOnPosition(53, 03, string.Format("Level: {0}",level),ConsoleColor.Magenta);
             PrintOnPosition(53, 5, string.Format("Score: {0}", score), ConsoleColor.Magenta);
             PrintOnPosition(53, 7, string.Format("Lives: {0}", Tank.LivesLeft), ConsoleColor.Magenta);
         }
