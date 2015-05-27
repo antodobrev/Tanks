@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Ports;
 using System.Linq;
 using System.Threading;
 
@@ -20,7 +21,7 @@ namespace Tanks
             //current player name
             Console.WriteLine();
             Console.Write(@"                        Enter your name: ");
-            string name = Console.ReadLine().ToUpper();
+            string name = Console.ReadLine().ToUpper().Trim();
             Console.Clear();
             string[] scorePair = { "pesho", "0" };
             using (reader)
@@ -32,7 +33,8 @@ namespace Tanks
                     {
                         break;
                     }
-                    scorePair = line.Split();
+                    char[] ch = {' '};
+                    scorePair = line.Split(ch,StringSplitOptions.RemoveEmptyEntries);
                     scoreList.Add(scorePair[0], int.Parse(scorePair[1]));
                 }
                 //adding cuurent player name and score
@@ -65,7 +67,8 @@ namespace Tanks
             {
                 foreach (var pair in sortedScoreList)
                 {
-                    writeScore.WriteLine("{0} {1}", pair.Key, pair.Value);
+                    string name = pair.Key.Trim();
+                    writeScore.WriteLine("{0} {1}", name, pair.Value);
                 }
             }
         }
@@ -94,10 +97,6 @@ namespace Tanks
             }
             Console.WriteLine();
             Console.WriteLine(@"                           Play again? Y\N");
-            //add restart mode.
-
-            
-            //"Press any key to continue goes black"
             Console.ForegroundColor = ConsoleColor.Black;
         }   
     }
