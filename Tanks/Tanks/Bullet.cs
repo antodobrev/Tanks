@@ -6,7 +6,7 @@ namespace Tanks
     {
         public static char body = '*';
         public string Direction = string.Empty;
-        private const ConsoleColor color = ConsoleColor.Red;
+        private ConsoleColor color = ConsoleColor.Red;
         private int x;
         private int y;
         private int prevX;
@@ -65,6 +65,7 @@ namespace Tanks
         {
             this.x = tank.X;
             this.y = tank.Y;
+            this.color = ConsoleColor.White;
             this.boundaryX = tank.boundaryX;
             this.boundaryY = tank.boundaryY;
             if (tank.Direction == "up" && tank.Y != 0)
