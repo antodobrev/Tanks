@@ -7,7 +7,7 @@ namespace Tanks
         private int x;
         private int y;
 
-        private const string symbol = "@";
+        private char symbol = '@';
         private ConsoleColor color = ConsoleColor.DarkMagenta;
 
         private bool ruined = false;
@@ -40,11 +40,15 @@ namespace Tanks
             set { solid = value; }
         }
 
-        public string Symbol
+        public char Symbol
         {
             get
             {
                 return symbol;
+            }
+            set
+            {
+                symbol = value;
             }
         }
 
@@ -92,7 +96,7 @@ namespace Tanks
                 }
         }
 
-        static void PrintOnPosition(int x, int y, string str, ConsoleColor color = ConsoleColor.DarkBlue)
+        static void PrintOnPosition(int x, int y, char str, ConsoleColor color = ConsoleColor.DarkBlue)
         {
             Console.SetCursorPosition(x, y);
             Console.ForegroundColor = color;

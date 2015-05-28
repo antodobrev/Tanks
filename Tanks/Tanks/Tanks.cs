@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Threading;
 
@@ -254,103 +255,22 @@ namespace Tanks
         {
 
             List<Brick> bricksPositions = new List<Brick>();
-
-            for (int i = 7; i < 45; i++)
+            using (StreamReader reader = new StreamReader("..\\..\\res\\coordinates.txt"))
             {
-                Brick brick = new Brick
-                {
-                    X = i,
-                    Y = 12
-                };
-                bricksPositions.Add(brick);
-            }
 
-            for (int i = 8; i < 28; i++)
-            {
-                Brick brick = new Brick
+                string line = string.Empty;
+                while ((line = reader.ReadLine()) != null)
                 {
-                    X = 25,
-                    Y = i
-                };
-                bricksPositions.Add(brick);
+                    string[] brickParts = line.Split(' ');
+                    Brick brick = new Brick
+                    {
+                        X = int.Parse(brickParts[1]),
+                        Y = int.Parse(brickParts[2]),
+                        Symbol = Convert.ToChar(brickParts[0])
+                    };
+                    bricksPositions.Add(brick);
+                }
             }
-
-            for (int i = 1; i < 15; i++)
-            {
-                Brick brick = new Brick
-                {
-                    X = i,
-                    Y = 7
-                };
-                bricksPositions.Add(brick);
-            }
-
-            for (int i = 2; i < 11; i++)
-            {
-                Brick brick = new Brick
-                {
-                    X = 15,
-                    Y = i
-                };
-                bricksPositions.Add(brick);
-            }
-
-            for (int i = 6; i < 39; i++)
-            {
-                Brick brick = new Brick
-                {
-                    X = i,
-                    Y = 30
-                };
-                bricksPositions.Add(brick);
-            }
-
-            for (int i = 27; i < 49; i++)
-            {
-                Brick brick = new Brick
-                {
-                    X = i,
-                    Y = 25
-                };
-                bricksPositions.Add(brick);
-            }
-
-            for (int i = 1; i < 17; i++)
-            {
-                Brick brick = new Brick
-                {
-                    X = 4,
-                    Y = i
-                };
-                brick.Color = ConsoleColor.DarkGray;
-                brick.Solid = true;
-                bricksPositions.Add(brick);
-            }
-
-            for (int i = 18; i < 34; i++)
-            {
-                Brick brick = new Brick
-                {
-                    X = 46,
-                    Y = i
-                };
-                brick.Color = ConsoleColor.DarkGray;
-                brick.Solid = true;
-                bricksPositions.Add(brick);
-            }
-
-            for (int i = 7; i < 45; i++)
-            {
-                Brick brick = new Brick
-                {
-                    X = i,
-                    Y = 13
-                };
-                brick.Color = ConsoleColor.DarkGray;
-                brick.Solid = true;
-                bricksPositions.Add(brick);
-            }
-
             return bricksPositions;
         }
 
