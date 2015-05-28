@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Tanks
 {
-    class Tank : GameObject
+    class Tank
     {
         private int x;
         private int y;

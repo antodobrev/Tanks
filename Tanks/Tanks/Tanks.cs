@@ -24,8 +24,8 @@ namespace Tanks
             int boundaryX = WindowWidth - GameMenuWidth;
             int boundaryY = WindowHeight;
 
-            //Intro.FirstIntro();
-            //Intro.SecondIntro();
+            Intro.FirstIntro();
+            Intro.SecondIntro();
 
             Random random = new Random();
             int MaximumEnemies = 10;
@@ -144,7 +144,7 @@ namespace Tanks
                     }
                     DetectCollitionWithBullet(enemiesBullets, bricks);
                     DetectCollitionWithBullet(playerBullets, bricks);
-                    BulletsMAtch(playerBullets,enemiesBullets);
+                    BulletsMatch(playerBullets,enemiesBullets);
 
                     MoveBulletInField(playerBullets);
                     MoveBulletInField(enemiesBullets);
@@ -399,7 +399,7 @@ namespace Tanks
             }
         }
 
-        public static void BulletsMAtch(List<Bullet> playerBullets, List<Bullet> enemiesBullets)
+        public static void BulletsMatch(List<Bullet> playerBullets, List<Bullet> enemiesBullets)
         {
             foreach (var playerBullet in playerBullets)
             {

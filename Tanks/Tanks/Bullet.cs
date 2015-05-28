@@ -2,7 +2,7 @@
 
 namespace Tanks
 {
-    class Bullet : GameObject
+    class Bullet
     {
         public static char body = '*';
         public string Direction = string.Empty;
